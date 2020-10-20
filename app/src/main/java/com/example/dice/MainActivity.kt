@@ -130,6 +130,7 @@ class MainActivity : AppCompatActivity() {
             for ((x, die) in dice.withIndex()) {
                 die.setImageResource(dieResources[results[x]])
                 recents[x].clear()
+                setVisibility()
             }
             0
         } else {
