@@ -2,6 +2,7 @@ package com.example.dice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.example.dice.databinding.ActivityMainBinding
@@ -14,7 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     private var time = 0
     private val dieResources = listOf(R.drawable.d6__1, R.drawable.d6__2, R.drawable.d6__3, R.drawable.d6__4, R.drawable.d6__5, R.drawable.d6__6)
+    private val visibility = mutableListOf(true, false, false, false, false, false)
     private lateinit var dice: List<ImageView>
+    private lateinit var clickedDie: ImageView
 
     private val recents = listOf<MutableList<Int>>(mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf())
 
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         dice = listOf(binding.ivDie1, binding.ivDie2, binding.ivDie3, binding.ivDie4, binding.ivDie5, binding.ivDie6)
+
+        setVisibility()
 
         binding.bRoll.setOnClickListener {
             if (this::timer.isInitialized) timer.cancel()
@@ -36,6 +41,41 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        binding.bAdd.setOnClickListener {
+            for ((x, state) in visibility.withIndex()) {
+                if (!state) {
+                    visibility[x] = true
+                    setVisibility()
+                    break
+                }
+            }
+        }
+    }
+
+    private fun setVisibility() {
+        for ((x, die) in dice.withIndex()) {
+            if (visibility[x]) {
+                die.setImageResource(dieResources[5])
+                die.visibility = View.VISIBLE
+                die.setOnClickListener {
+                    binding.clPopup.visibility = View.VISIBLE
+                    addOrRemove(die)
+                }
+            } else die.visibility = View.GONE
+        }
+    }
+
+    private fun addOrRemove(selectedDie: ImageView) {
+        binding.ivAddD6.setOnClickListener {
+            selectedDie.setImageResource(dieResources[5])
+            binding.clPopup.visibility = View.GONE
+        }
+        binding.tvRemove.setOnClickListener {
+            visibility[dice.indexOf(selectedDie)] = false
+            binding.clPopup.visibility = View.GONE
+            setVisibility()
         }
     }
 

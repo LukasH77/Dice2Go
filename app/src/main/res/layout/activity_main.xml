@@ -7,165 +7,221 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/bRoll"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Roll"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/bAdd"
-            app:layout_constraintStart_toEndOf="@+id/tvResult"
-            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/tvResult"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:gravity="center"
-            android:text="Result: "
-            app:layout_constraintBottom_toBottomOf="@+id/bRoll"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bRoll" /><![CDATA[
+            <Button
+                android:id="@+id/bRoll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Roll"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bAdd"
+                app:layout_constraintStart_toEndOf="@+id/tvResult"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-            android:id="@+id/constraintLayout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bRoll"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center|start"
+                android:text="Result: "
+                app:layout_constraintBottom_toBottomOf="@+id/bRoll"
+                app:layout_constraintEnd_toStartOf="@+id/bRoll"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bRoll" />
 
-        ]]>
+            <ImageView
+                android:id="@+id/ivDie5"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/ivDie6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline"
+                app:srcCompat="@drawable/d6__6" />
 
-        <ImageView
-            android:id="@+id/ivDie5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/ivDie6"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:srcCompat="@drawable/d6__6" />
+            <ImageView
+                android:id="@+id/ivDie6"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/ivDie5"
+                app:layout_constraintTop_toTopOf="@+id/guideline"
+                app:srcCompat="@drawable/d6__6" />
 
-        <ImageView
-            android:id="@+id/ivDie6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ivDie5"
-            app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:srcCompat="@drawable/d6__6" />
+            <ImageView
+                android:id="@+id/ivDie3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/ivDie4"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline2"
+                app:srcCompat="@drawable/d6__6" />
 
-        <ImageView
-            android:id="@+id/ivDie3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/ivDie4"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:srcCompat="@drawable/d6__6" />
+            <ImageView
+                android:id="@+id/ivDie4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivDie3"
+                app:layout_constraintTop_toTopOf="@+id/guideline2"
+                app:srcCompat="@drawable/d6__6" />
 
-        <ImageView
-            android:id="@+id/ivDie4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivDie3"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:srcCompat="@drawable/d6__6" />
+            <ImageView
+                android:id="@+id/ivDie1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/ivDie2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/d6__6" />
 
-        <ImageView
-            android:id="@+id/ivDie1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/ivDie2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/d6__6" />
+            <ImageView
+                android:id="@+id/ivDie2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/ivDie1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.48"
+                app:srcCompat="@drawable/d6__6" />
 
-        <ImageView
-            android:id="@+id/ivDie2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ivDie1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.48"
-            app:srcCompat="@drawable/d6__6" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="446dp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="478dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="223dp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="240dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="669dp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="716dp" />
+            <Button
+                android:id="@+id/bAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Add Die"
+                app:layout_constraintBottom_toBottomOf="@+id/bRoll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bRoll" />
 
-        <Button
-            android:id="@+id/bAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Add Die"
-            app:layout_constraintBottom_toBottomOf="@+id/bRoll"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bRoll" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clPopup"
+                android:layout_width="162dp"
+                android:layout_height="193dp"
+                android:background="@android:color/holo_orange_dark"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.449"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tvReplace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Replace:"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ivAddD6"
+                    app:layout_constraintStart_toStartOf="@+id/ivAddD6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.293" />
+
+                <ImageView
+                    android:id="@+id/ivAddD6"
+                    android:layout_width="58dp"
+                    android:layout_height="118dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/addd6" />
+
+                <TextView
+                    android:id="@+id/tvRemove"
+                    android:layout_width="66dp"
+                    android:layout_height="122dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@android:color/holo_red_dark"
+                    android:gravity="center"
+                    android:text="REMOVE"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivAddD6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/ivAddD6"
+                    app:layout_constraintTop_toTopOf="@+id/ivAddD6"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
