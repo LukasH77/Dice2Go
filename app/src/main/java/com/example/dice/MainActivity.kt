@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val die = binding.ivDie
+        val die = binding.ivDie1
 
         binding.bRoll.setOnClickListener {
             if (this::x.isInitialized) x.cancel()
