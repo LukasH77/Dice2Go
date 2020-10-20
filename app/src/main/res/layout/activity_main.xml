@@ -184,14 +184,16 @@
 
                 <TextView
                     android:id="@+id/tvReplace"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Replace:"
+                    android:background="#CFC4C4"
+                    android:gravity="center"
+                    android:text="Swap:"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/ivAddD6"
                     app:layout_constraintStart_toStartOf="@+id/ivAddD6"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.293" />
+                    app:layout_constraintVertical_bias="0.178" />
 
                 <ImageView
                     android:id="@+id/ivAddD6"
@@ -199,6 +201,7 @@
                     android:layout_height="118dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginBottom="24dp"
+                    android:background="#FDFCFC"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintStart_toStartOf="parent"
@@ -206,10 +209,11 @@
 
                 <TextView
                     android:id="@+id/tvRemove"
-                    android:layout_width="66dp"
-                    android:layout_height="122dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_marginStart="16dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:layout_marginEnd="12dp"
+                    android:background="#FFEB3B"
                     android:gravity="center"
                     android:text="REMOVE"
                     android:textStyle="bold"
@@ -218,6 +222,19 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/ivAddD6"
                     app:layout_constraintTop_toTopOf="@+id/ivAddD6"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/bExit"
+                    android:layout_width="25dp"
+                    android:layout_height="23dp"
+                    android:background="@android:color/holo_red_dark"
+                    android:text="X"
+                    app:layout_constraintBottom_toTopOf="@+id/tvRemove"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
