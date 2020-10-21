@@ -53,11 +53,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        val job = Job()
-
-        val scope = CoroutineScope(Dispatchers.Main + job)
-
-                dice = listOf(
+        dice = listOf(
             binding.ivDie1,
             binding.ivDie2,
             binding.ivDie3,
@@ -71,18 +67,9 @@ class HomeFragment : Fragment() {
         binding.bRoll.setOnClickListener {
             if (this::timer.isInitialized) timer.cancel()
             time = 5
-            val results = listOf(
-                (0..5).random(),
-                (0..5).random(),
-                (0..5).random(),
-                (0..5).random(),
-                (0..5).random(),
-                (0..5).random()
-            )
-            binding.tvResult.text = "Result: $results"
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
-                    if (setImg(results) == 0) {
+                    if (setImg() == 0) {
                         this.cancel()
                     }
                 }
@@ -99,12 +86,17 @@ class HomeFragment : Fragment() {
             }
         }
 
-
+        binding.bClear.setOnClickListener {
+            for (i in visibility.indices) {
+                 visibility[i] = false
+            }
+            setVisibility()
+        }
         return binding.root
     }
 
 
-        private fun setVisibility() {
+    private fun setVisibility() {
         for ((x, die) in dice.withIndex()) {
             if (visibility[x]) {
                 die.visibility = View.VISIBLE
@@ -148,12 +140,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setImg(results: List<Int>): Int {
+    private fun setImg(): Int {
         return if (time < 1) {
-            for ((x, die) in dice.withIndex()) {
-                die.setImageResource(dieResources[results[x]])
-                recents[x].clear()
-                setVisibility()
+            for (list in recents) {
+                list.clear()
             }
             0
         } else {
