@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -32,16 +33,16 @@ class HomeFragment : Fragment() {
         R.drawable.d6__5,
         R.drawable.d6__6
     )
-    private val visibility = mutableListOf(true, false, false, false, false, false)
+    private val visibility = mutableListOf(false, false, false, false, false, false)
     private lateinit var dice: List<ImageView>
 
     private val recents = listOf<MutableList<Int>>(
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf()
+        mutableListOf(dieResources.last()),
+        mutableListOf(dieResources.last()),
+        mutableListOf(dieResources.last()),
+        mutableListOf(dieResources.last()),
+        mutableListOf(dieResources.last()),
+        mutableListOf(dieResources.last())
     )
 
 
@@ -67,9 +68,18 @@ class HomeFragment : Fragment() {
         binding.bRoll.setOnClickListener {
             if (this::timer.isInitialized) timer.cancel()
             time = 5
+            val results = listOf(
+                (0..5).random(),
+                (0..5).random(),
+                (0..5).random(),
+                (0..5).random(),
+                (0..5).random(),
+                (0..5).random()
+            )
+            binding.tvResult.text = "Result: $results"
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
-                    if (setImg() == 0) {
+                    if (setImg(results) == 0) {
                         this.cancel()
                     }
                 }
@@ -88,11 +98,10 @@ class HomeFragment : Fragment() {
 
         binding.bClear.setOnClickListener {
             for (i in visibility.indices) {
-                 visibility[i] = false
+                visibility[i] = false
             }
             setVisibility()
         }
-
 
         setHasOptionsMenu(true)
         return binding.root
@@ -104,7 +113,10 @@ class HomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, findNavController()) || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
     private fun setVisibility() {
@@ -133,13 +145,11 @@ class HomeFragment : Fragment() {
             for (i in visibility.indices) {
                 if (!visibility[i]) {
                     lastVisibleIndex = i - 1
-                    println(lastVisibleIndex)
                     break
                 }
             }
             val steps = lastVisibleIndex - currentIndex
             for (i in 0 until steps) {
-                println(i)
                 dice[currentIndex + i].setImageDrawable(dice[currentIndex + i + 1].drawable)
             }
             binding.clPopup.visibility = View.GONE
@@ -151,31 +161,29 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setImg(): Int {
+    private fun setImg(results: List<Int>): Int {
         return if (time < 1) {
-            for (list in recents) {
-                list.clear()
+            for ((x, die) in dice.withIndex()) {
+                die.setImageResource(dieResources[results[x]])
+                recents[x].add(dieResources[results[x]])
+                setVisibility()
             }
             0
         } else {
-            for (list in recents) {
-                for (die in dice) {
-                    var current = dieResources[(0..5).random()]
-                    list.add(current)
-                    when (list.size) {
-                        0 -> die.setImageResource(dieResources[(0..4).random()])
-                        1 -> while (current == list.last()) {
-                            current = dieResources[(0..5).random()]
-                            die.setImageResource(dieResources[(0..5).random()])
-                        }
-                        else -> while (current == list.last() || current == list[list.lastIndex - 1]) {
-                            current = dieResources[(0..5).random()]
-                            die.setImageResource(dieResources[(0..5).random()])
-                        }
+            for (die in dice) {
+                var current = dieResources[(0..5).random()]
+                val currentList = recents[dice.indexOf(die)]
+                when (currentList.size) {
+                    1 -> while (current == currentList.last()) {
+                        current = dieResources[(0..5).random()]
+                    }
+                    else -> while (current == currentList.last() || current == currentList[currentList.lastIndex - 1] || dieResources.indexOf(current) == results[dice.indexOf(die)]) {
+                        current = dieResources[(0..5).random()]
                     }
                 }
+                currentList.add(current)
+                die.setImageResource(current)
             }
-            println(time)
             time--
             7
         }
