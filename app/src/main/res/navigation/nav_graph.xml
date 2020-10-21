@@ -14,17 +14,17 @@
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/helpFragment"
-        android:name="com.example.dice.help.HelpFragment"
-        android:label="HelpFragment"
-        tools:layout="@layout/help_fragment"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.dice.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings"/>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.dice.help.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

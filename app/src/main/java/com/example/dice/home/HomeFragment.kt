@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.dice.R
+import com.example.dice.database.Settings
+import com.example.dice.database.SettingsDatabase
 import com.example.dice.databinding.FragmentHomeBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,33 +20,16 @@ import kotlinx.coroutines.Job
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
+
 class HomeFragment : Fragment() {
+
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
 
     private lateinit var timer: Timer
-
     private var time = 0
-    private val dieResources = listOf(
-        R.drawable.d6__1,
-        R.drawable.d6__2,
-        R.drawable.d6__3,
-        R.drawable.d6__4,
-        R.drawable.d6__5,
-        R.drawable.d6__6
-    )
-    private val visibility = mutableListOf(false, false, false, false, false, false)
-    private lateinit var dice: List<ImageView>
 
-    private val recents = listOf<MutableList<Int>>(
-        mutableListOf(dieResources.last()),
-        mutableListOf(dieResources.last()),
-        mutableListOf(dieResources.last()),
-        mutableListOf(dieResources.last()),
-        mutableListOf(dieResources.last()),
-        mutableListOf(dieResources.last())
-    )
-
+    private lateinit var dice: List<Die>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,19 +39,27 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
+//        val database = SettingsDatabase.createInstance(this.requireActivity().application)
+//        val dao = database.settingsDao
+//        val settings = Settings(1, true, false)
+//        dao.insert(settings)
+
+
+
         dice = listOf(
-            binding.ivDie1,
-            binding.ivDie2,
-            binding.ivDie3,
-            binding.ivDie4,
-            binding.ivDie5,
-            binding.ivDie6
+            D6(binding.ivDie1),
+            D6(binding.ivDie2),
+            D6(binding.ivDie3),
+            D6(binding.ivDie4),
+            D6(binding.ivDie5),
+            D6(binding.ivDie6)
         )
 
         setVisibility()
 
         binding.bRoll.setOnClickListener {
             if (this::timer.isInitialized) timer.cancel()
+//            time = if (dao.getAll()[0].animation) 5 else 1
             time = 5
             val results = listOf(
                 (0..5).random(),
@@ -87,9 +80,9 @@ class HomeFragment : Fragment() {
         }
 
         binding.bAdd.setOnClickListener {
-            for ((x, state) in visibility.withIndex()) {
-                if (!state) {
-                    visibility[x] = true
+            for (die in dice) {
+                if (!die.visibility) {
+                    die.visibility = true
                     setVisibility()
                     break
                 }
@@ -97,8 +90,8 @@ class HomeFragment : Fragment() {
         }
 
         binding.bClear.setOnClickListener {
-            for (i in visibility.indices) {
-                visibility[i] = false
+            for (i in dice.indices) {
+                dice[i].visibility = false
             }
             setVisibility()
         }
@@ -120,40 +113,40 @@ class HomeFragment : Fragment() {
     }
 
     private fun setVisibility() {
-        for ((x, die) in dice.withIndex()) {
-            if (visibility[x]) {
-                die.visibility = View.VISIBLE
-                die.setOnClickListener {
+        for (die in dice) {
+            if (die.visibility) {
+                die.uiRepresentation.visibility = View.VISIBLE
+                die.uiRepresentation.setOnClickListener {
                     binding.clPopup.visibility = View.VISIBLE
                     addOrRemove(die)
                 }
             } else {
-                die.visibility = View.GONE
-                die.setImageResource(dieResources[5])
+                die.uiRepresentation.visibility = View.GONE
+                die.uiRepresentation.setImageResource(die.initialSide)
             }
         }
     }
 
-    private fun addOrRemove(selectedDie: ImageView) {
+    private fun addOrRemove(selectedDie: Die) {
         binding.ivAddD6.setOnClickListener {
-            selectedDie.setImageResource(dieResources[5])
+            selectedDie.uiRepresentation.setImageResource(selectedDie.initialSide)
             binding.clPopup.visibility = View.GONE
         }
         binding.tvRemove.setOnClickListener {
             val currentIndex = dice.indexOf(selectedDie)
             var lastVisibleIndex = 5
-            for (i in visibility.indices) {
-                if (!visibility[i]) {
+            for (i in dice.indices) {
+                if (!dice[i].visibility) {
                     lastVisibleIndex = i - 1
                     break
                 }
             }
             val steps = lastVisibleIndex - currentIndex
             for (i in 0 until steps) {
-                dice[currentIndex + i].setImageDrawable(dice[currentIndex + i + 1].drawable)
+                dice[currentIndex + i].uiRepresentation.setImageDrawable(dice[currentIndex + i + 1].uiRepresentation.drawable)
             }
             binding.clPopup.visibility = View.GONE
-            visibility[lastVisibleIndex] = false
+            dice[lastVisibleIndex].visibility = false
             setVisibility()
         }
         binding.bExit.setOnClickListener {
@@ -164,25 +157,28 @@ class HomeFragment : Fragment() {
     private fun setImg(results: List<Int>): Int {
         return if (time < 1) {
             for ((x, die) in dice.withIndex()) {
-                die.setImageResource(dieResources[results[x]])
-                recents[x].add(dieResources[results[x]])
+                die.uiRepresentation.setImageResource(die.sides[results[x]])
+                die.recentSides.add(die.sides[results[x]])
                 setVisibility()
             }
             0
         } else {
             for (die in dice) {
-                var current = dieResources[(0..5).random()]
-                val currentList = recents[dice.indexOf(die)]
+                var current = die.sides[(0..5).random()]
+                val currentList = die.recentSides
                 when (currentList.size) {
                     1 -> while (current == currentList.last()) {
-                        current = dieResources[(0..5).random()]
+                        current = die.sides[(0..5).random()]
                     }
-                    else -> while (current == currentList.last() || current == currentList[currentList.lastIndex - 1] || dieResources.indexOf(current) == results[dice.indexOf(die)]) {
-                        current = dieResources[(0..5).random()]
+                    else -> while (current == currentList.last()
+                        || current == currentList[currentList.lastIndex - 1]
+                        || die.sides.indexOf(current) == results[dice.indexOf(die)]
+                    ) {
+                        current = die.sides[(0..5).random()]
                     }
                 }
                 currentList.add(current)
-                die.setImageResource(current)
+                die.uiRepresentation.setImageResource(current)
             }
             time--
             7
