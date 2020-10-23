@@ -1,9 +1,6 @@
 package com.example.dice.home
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +18,7 @@ open class Die(
 
         var time = 0
 
-        fun setVisibility(dice: List<Die>) {
+        fun setVisibility(dice: MutableList<Die>) {
             for (die in dice) {
                 if (die.visibility) {
                     die.uiRepresentation.visibility = View.VISIBLE
@@ -32,10 +29,10 @@ open class Die(
             }
         }
 
-        fun setImg(dice: List<Die>): Int {
+        fun roll(dice: MutableList<Die>): Int {
             return if (time < 1) {
                 for (die in dice) {
-                    setVisibility(dice)
+                    //setVisibility(dice)
                 }
                 time
             } else {
@@ -64,7 +61,7 @@ open class Die(
             dieMenu.visibility = View.GONE
         }
 
-        fun resetBackground(dice: List<Die>) {
+        fun resetBackground(dice: MutableList<Die>) {
             for (die in dice) {
                 die.uiRepresentation.background = null
             }
@@ -72,23 +69,25 @@ open class Die(
     }
 
     fun setupDieClicks(
-        dice: List<Die>,
+        dice: MutableList<Die>,
         dieMenu: ConstraintLayout,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         removeButton: ImageButton,
         exitButton: ImageButton
     ) {
+        val selectedIndex = dice.indexOf(this)
         this.uiRepresentation.setOnClickListener {
             resetBackground(dice)
             this.uiRepresentation.setBackgroundResource(R.color.primaryColor)
             dieMenu.visibility = View.VISIBLE
-            addOrRemove(dice, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
+            addOrRemove(selectedIndex, dice, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
         }
     }
 
     private fun addOrRemove(
-        dice: List<Die>,
+        selectedIndex: Int,
+        dice: MutableList<Die>,
         dieMenu: ConstraintLayout,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
@@ -96,13 +95,17 @@ open class Die(
         exitButton: ImageButton
     ) {
         replaceD4Button.setOnClickListener {
+            dice.removeAt(selectedIndex)
+            dice.add(selectedIndex, D4(this.uiRepresentation))
             resetBackground(dice)
-            this.uiRepresentation.setImageResource(this.initialSide)
+            this.uiRepresentation.setImageResource(R.drawable.d4__4)
             dieMenu.visibility = View.GONE
         }
         replaceD6Button.setOnClickListener {
+            dice.removeAt(selectedIndex)
+            dice.add(selectedIndex, D6(this.uiRepresentation))
             resetBackground(dice)
-            this.uiRepresentation.setImageResource(this.initialSide)
+            this.uiRepresentation.setImageResource(R.drawable.d6__6)
             dieMenu.visibility = View.GONE
         }
         removeButton.setOnClickListener {
@@ -117,6 +120,7 @@ open class Die(
             }
             val steps = lastVisibleIndex - currentIndex
             for (i in 0 until steps) {
+
                 dice[currentIndex + i].uiRepresentation.setImageDrawable(dice[currentIndex + i + 1].uiRepresentation.drawable)
             }
             dieMenu.visibility = View.GONE

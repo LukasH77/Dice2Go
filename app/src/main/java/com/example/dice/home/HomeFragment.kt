@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 //        dao.insert(settings)
 
         dice = mutableListOf(
-            D4(binding.ivDie1),
+            D6(binding.ivDie1),
             D6(binding.ivDie2),
             D6(binding.ivDie3),
             D6(binding.ivDie4),
@@ -58,19 +58,19 @@ class HomeFragment : Fragment() {
         val addButton = binding.bAdd
 
         for (die in dice) {
-            die.setupDieClicks(dice, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
+            die.setupDieClicks(dice as MutableList<Die>, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
         }
 
-        Die.setVisibility(dice)
+        Die.setVisibility(dice as MutableList<Die>)
 
         rollButton.setOnClickListener {
             Die.removeDieMenu(dieMenu)
-            Die.resetBackground(dice)
+            Die.resetBackground(dice as MutableList<Die>)
             if (this::timer.isInitialized) timer.cancel()
             Die.time = 5
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
-                    if (Die.setImg(dice) == 0) {
+                    if (Die.roll(dice as MutableList<Die>) == 0) {
                         this.cancel()
                     }
                 }
@@ -79,12 +79,12 @@ class HomeFragment : Fragment() {
 
         addButton.setOnClickListener {
             Die.removeDieMenu(dieMenu)
-            Die.resetBackground(dice)
+            Die.resetBackground(dice as MutableList<Die>)
             for (die in dice) {
                 if (!die.visibility) {
-                    Die.setVisibility(dice)
+                    Die.setVisibility(dice as MutableList<Die>)
                     die.visibility = true
-                    Die.setVisibility(dice)
+                    Die.setVisibility(dice as MutableList<Die>)
                     break
                 }
             }
@@ -92,16 +92,16 @@ class HomeFragment : Fragment() {
 
         clearButton.setOnClickListener {
             Die.removeDieMenu(dieMenu)
-            Die.resetBackground(dice)
+            Die.resetBackground(dice as MutableList<Die>)
             for (i in dice.indices) {
                 dice[i].visibility = false
             }
-            Die.setVisibility(dice)
+            Die.setVisibility(dice as MutableList<Die>)
         }
 
         binding.clMain.setOnClickListener {
             Die.removeDieMenu(dieMenu)
-            Die.resetBackground(dice)
+            Die.resetBackground(dice as MutableList<Die>)
         }
 
         setHasOptionsMenu(true)
@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Die.removeDieMenu(dieMenu)
-        Die.resetBackground(dice)
+        Die.resetBackground(dice as MutableList<Die>)
         return NavigationUI.onNavDestinationSelected(
             item,
             findNavController()
