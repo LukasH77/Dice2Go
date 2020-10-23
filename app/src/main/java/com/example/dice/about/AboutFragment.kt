@@ -1,4 +1,4 @@
-package com.example.dice.help
+package com.example.dice.about
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
