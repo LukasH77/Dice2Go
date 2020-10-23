@@ -31,9 +31,6 @@ open class Die(
 
         fun roll(dice: MutableList<Die>): Int {
             return if (time < 1) {
-                for (die in dice) {
-                    //setVisibility(dice)
-                }
                 time
             } else {
                 for (die in dice) {
@@ -94,23 +91,27 @@ open class Die(
         removeButton: ImageButton,
         exitButton: ImageButton
     ) {
+        println(selectedIndex)
         replaceD4Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D4(this.uiRepresentation))
             resetBackground(dice)
-            this.uiRepresentation.setImageResource(R.drawable.d4__4)
+            dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d4__4)
+            dice[selectedIndex].visibility = true
+            setVisibility(dice)
             dieMenu.visibility = View.GONE
         }
         replaceD6Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D6(this.uiRepresentation))
             resetBackground(dice)
-            this.uiRepresentation.setImageResource(R.drawable.d6__6)
+            dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d6__6)
+            dice[selectedIndex].visibility = true
+            setVisibility(dice)
             dieMenu.visibility = View.GONE
         }
         removeButton.setOnClickListener {
             resetBackground(dice)
-            val currentIndex = dice.indexOf(this)
             var lastVisibleIndex = 5
             for (i in dice.indices) {
                 if (!dice[i].visibility) {
@@ -118,11 +119,15 @@ open class Die(
                     break
                 }
             }
-            val steps = lastVisibleIndex - currentIndex
+            val steps = lastVisibleIndex - selectedIndex
+            println(dice)
             for (i in 0 until steps) {
-
-                dice[currentIndex + i].uiRepresentation.setImageDrawable(dice[currentIndex + i + 1].uiRepresentation.drawable)
+                val temp = dice[selectedIndex + i + 1]
+//                dice.removeAt(selectedIndex)
+//                dice.add(selectedIndex + i, temp)
+                dice[selectedIndex + i].uiRepresentation.setImageDrawable(dice[selectedIndex + i + 1].uiRepresentation.drawable)
             }
+            println(dice)
             dieMenu.visibility = View.GONE
             dice[lastVisibleIndex].visibility = false
             setVisibility(dice)
