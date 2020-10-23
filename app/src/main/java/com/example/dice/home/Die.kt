@@ -7,12 +7,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.dice.R
 
 open class Die(
-    val sidesAmount: Int,
-    val initialSide: Int,
-    val sides: List<Int>,
-    val recentSides: MutableList<Int>,
+    var sidesAmount: Int,
+    var initialSide: Int,
+    var sides: List<Int>,
+    var recentSides: MutableList<Int>,
     var visibility: Boolean,
-    val uiRepresentation: ImageView
+    var uiRepresentation: ImageView
 ) {
     companion object {
 
@@ -78,7 +78,15 @@ open class Die(
             resetBackground(dice)
             this.uiRepresentation.setBackgroundResource(R.color.primaryColor)
             dieMenu.visibility = View.VISIBLE
-            addOrRemove(selectedIndex, dice, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
+            addOrRemove(
+                selectedIndex,
+                dice,
+                dieMenu,
+                replaceD4Button,
+                replaceD6Button,
+                removeButton,
+                exitButton
+            )
         }
     }
 
@@ -95,21 +103,27 @@ open class Die(
         replaceD4Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D4(this.uiRepresentation))
+
+
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d4__4)
             dice[selectedIndex].visibility = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
         }
+
         replaceD6Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D6(this.uiRepresentation))
+
+
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d6__6)
             dice[selectedIndex].visibility = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
         }
+
         removeButton.setOnClickListener {
             resetBackground(dice)
             var lastVisibleIndex = 5
@@ -119,19 +133,50 @@ open class Die(
                     break
                 }
             }
+
+            println("lastVisibleIndex: $lastVisibleIndex")
+            println("selectedIndex: $selectedIndex")
             val steps = lastVisibleIndex - selectedIndex
             println(dice)
             for (i in 0 until steps) {
-                val temp = dice[selectedIndex + i + 1]
-//                dice.removeAt(selectedIndex)
-//                dice.add(selectedIndex + i, temp)
-                dice[selectedIndex + i].uiRepresentation.setImageDrawable(dice[selectedIndex + i + 1].uiRepresentation.drawable)
+//                val temp = dice[selectedIndex + i + 1]
+//
+//                dice.removeAt(selectedIndex + i)
+//
+//                when (temp) {
+//                    is D4 -> {
+//                        println("d4")
+//                        dice.add(selectedIndex + i, D4(temp.uiRepresentation))
+//                        dice[selectedIndex + i].visibility = temp.visibility
+//                    }
+//                    is D6 -> {
+//                        println("d6")
+//                        dice.add(selectedIndex + i, D6(temp.uiRepresentation))
+//                        dice[selectedIndex + i].visibility = temp.visibility
+//                    }
+//                }
+//                println("temp2: $temp2")
+//
+//                temp2.uiRepresentation = temp1.uiRepresentation
+//                                println("${temp.recentSides}")
+//                dice[selectedIndex+ i] = dice[selectedIndex + i + 1]
+
+                //TODO This is basically cheating ... but it works!!!! Makes the subclasses a bit redundant..they're still used for replacements though, keep them in. It works. :D
+                // Not the prettiest solution, gotta admit that. OR IS IT?!
+                val replaced = dice[selectedIndex + i]
+                val replacement = dice[selectedIndex + i + 1]
+                replaced.uiRepresentation.setImageDrawable(replacement.uiRepresentation.drawable)
+                replaced.sidesAmount = replacement.sidesAmount
+                replaced.initialSide = replacement.initialSide
+                replaced.sides = replacement.sides
+                replaced.recentSides = replacement.recentSides
             }
             println(dice)
             dieMenu.visibility = View.GONE
             dice[lastVisibleIndex].visibility = false
             setVisibility(dice)
         }
+
         exitButton.setOnClickListener {
             removeDieMenu(dieMenu)
             resetBackground(dice)
