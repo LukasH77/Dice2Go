@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 //        dao.insert(settings)
 
         dice = mutableListOf(
-            D6(binding.ivDie1),
+            D4(binding.ivDie1),
             D6(binding.ivDie2),
             D6(binding.ivDie3),
             D6(binding.ivDie4),
@@ -47,6 +47,8 @@ class HomeFragment : Fragment() {
             D6(binding.ivDie6)
         )
         dieMenu = binding.clPopup
+
+        val replaceD4Button = binding.ibReplaceD4
         val replaceD6Button = binding.ibReplaceD6
         val removeButton = binding.ibRemove
         val exitButton = binding.ibExit
@@ -56,7 +58,7 @@ class HomeFragment : Fragment() {
         val addButton = binding.bAdd
 
         for (die in dice) {
-            die.setupDieClicks(dice, dieMenu, replaceD6Button, removeButton, exitButton)
+            die.setupDieClicks(dice, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
         }
 
         Die.setVisibility(dice)

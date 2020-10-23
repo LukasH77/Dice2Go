@@ -74,25 +74,32 @@ open class Die(
     fun setupDieClicks(
         dice: List<Die>,
         dieMenu: ConstraintLayout,
+        replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         removeButton: ImageButton,
         exitButton: ImageButton
     ) {
         this.uiRepresentation.setOnClickListener {
             resetBackground(dice)
-            this.uiRepresentation.setBackgroundResource(R.color.yellow)
+            this.uiRepresentation.setBackgroundResource(R.color.primaryColor)
             dieMenu.visibility = View.VISIBLE
-            addOrRemove(dice, dieMenu, replaceD6Button, removeButton, exitButton)
+            addOrRemove(dice, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
         }
     }
 
     private fun addOrRemove(
         dice: List<Die>,
         dieMenu: ConstraintLayout,
+        replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         removeButton: ImageButton,
         exitButton: ImageButton
     ) {
+        replaceD4Button.setOnClickListener {
+            resetBackground(dice)
+            this.uiRepresentation.setImageResource(this.initialSide)
+            dieMenu.visibility = View.GONE
+        }
         replaceD6Button.setOnClickListener {
             resetBackground(dice)
             this.uiRepresentation.setImageResource(this.initialSide)
@@ -137,7 +144,20 @@ class D6(uiRepresentation: ImageView) : Die(
     mutableListOf(R.drawable.d6__6),
     false,
     uiRepresentation
-) {
+)
 
-}
+class D4(uiRepresentation: ImageView) : Die(
+    4,
+    R.drawable.d4__4,
+    listOf(
+        R.drawable.d4__1,
+        R.drawable.d4__2,
+        R.drawable.d4__3,
+        R.drawable.d4__4
+    ),
+    mutableListOf(R.drawable.d4__4),
+    false,
+    uiRepresentation
+)
+
 
