@@ -75,23 +75,26 @@ class HomeFragment : Fragment() {
 
         Die.setVisibility(dice as MutableList<Die>)
 
+
+        //simulate first roll - doesn't fix the bug, but I think it makes it a bit better
+        Die.roll(dice as MutableList<Die>)
+
         rollButton.setOnClickListener {
             Die.removeDieMenu(dieMenu)
             Die.resetBackground(dice as MutableList<Die>)
-            if (this::timer.isInitialized) timer.cancel()
             Die.time = 6
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
                     if (Die.roll(dice as MutableList<Die>) == 0) {
                         println("running")
-                        for (die in dice) {
-                            if (!die.visibility) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
-                        }
-                        total += modifier
-                        totalText.text = "Total: $total"
-                        total = 0
                         this.cancel()
                     }
+                    for (die in dice) {
+                        if (!die.visibility) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
+                    }
+                    total += modifier
+                    totalText.text = "Total: $total"
+                    total = 0
                 }
             }
         }
