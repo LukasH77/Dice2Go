@@ -79,10 +79,11 @@ class HomeFragment : Fragment() {
             Die.removeDieMenu(dieMenu)
             Die.resetBackground(dice as MutableList<Die>)
             if (this::timer.isInitialized) timer.cancel()
-            Die.time = 5
+            Die.time = 6
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
                     if (Die.roll(dice as MutableList<Die>) == 0) {
+                        println("running")
                         for (die in dice) {
                             if (!die.visibility) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
                         }

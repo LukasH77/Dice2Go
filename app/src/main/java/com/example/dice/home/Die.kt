@@ -30,7 +30,9 @@ open class Die(
         }
 
         fun roll(dice: MutableList<Die>): Int {
-            return if (time < 1) {
+            return if (time == 1) {
+                println("roll, timer: $time")
+                time--
                 time
             } else {
                 for (die in dice) {
