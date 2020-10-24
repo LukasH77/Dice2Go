@@ -62,7 +62,15 @@ class HomeFragment : Fragment() {
         var modifier = 0
 
         for (die in dice) {
-            die.setupDieClicks(dice as MutableList<Die>, dieMenu, replaceD4Button, replaceD6Button, replaceD8Button, removeButton, exitButton)
+            die.setupDieClicks(
+                dice as MutableList<Die>,
+                dieMenu,
+                replaceD4Button,
+                replaceD6Button,
+                replaceD8Button,
+                removeButton,
+                exitButton
+            )
         }
 
         Die.setVisibility(dice as MutableList<Die>)
@@ -75,16 +83,16 @@ class HomeFragment : Fragment() {
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
                     if (Die.roll(dice as MutableList<Die>) == 0) {
-                        this.cancel()
                         for (die in dice) {
                             if (!die.visibility) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
                         }
                         total += modifier
                         totalText.text = "Total: $total"
+                        total = 0
+                        this.cancel()
                     }
                 }
             }
-            total = 0
         }
 
         addButton.setOnClickListener {
