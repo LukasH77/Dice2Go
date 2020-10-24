@@ -64,7 +64,7 @@
                 app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:srcCompat="@drawable/d6__6" />
+                app:srcCompat="@drawable/d8__8" />
 
             <ImageView
                 android:id="@+id/ivDie4"
@@ -94,7 +94,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/d6__6" />
+                app:srcCompat="@drawable/d4__4" />
 
             <ImageView
                 android:id="@+id/ivDie2"
@@ -129,6 +129,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="69dp"
                 android:layout_marginEnd="16dp"
                 android:text="Roll"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -152,25 +153,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="446dp" />
+                app:layout_constraintGuide_begin="400dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="223dp" />
+                app:layout_constraintGuide_begin="200dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="669dp" />
+                app:layout_constraintGuide_begin="600dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clPopup"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="300dp"
                 android:background="?colorPrimary"
@@ -200,7 +201,7 @@
                     android:layout_height="70dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toTopOf="@+id/ibHold"
+                    app:layout_constraintBottom_toTopOf="@+id/ibReplaceD8"
                     app:layout_constraintEnd_toEndOf="@+id/ibHold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/choose_d6" />
@@ -240,7 +241,73 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/choose_d4" />
 
+                <ImageButton
+                    android:id="@+id/ibReplaceD8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibHold"
+                    app:layout_constraintEnd_toEndOf="@+id/ibHold"
+                    app:layout_constraintStart_toStartOf="@+id/ibHold"
+                    app:srcCompat="@drawable/choose_d8" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Total:"
+                app:layout_constraintBottom_toTopOf="@+id/bClear"
+                app:layout_constraintEnd_toEndOf="@+id/bClear"
+                app:layout_constraintStart_toStartOf="@+id/bClear"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="35dp"
+                android:layout_height="0dp"
+                android:background="#000000"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/bRoll"
+                app:layout_constraintTop_toTopOf="@+id/textView4"
+                app:srcCompat="@android:drawable/btn_minus" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="39dp"
+                android:layout_height="0dp"
+                android:background="@android:color/black"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                app:layout_constraintEnd_toEndOf="@+id/bRoll"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/textView4"
+                app:srcCompat="@android:drawable/btn_plus" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=" +0"
+                app:layout_constraintBottom_toTopOf="@+id/bRoll"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+                app:layout_constraintStart_toEndOf="@+id/imageButton2"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="Select Die"
+                app:layout_constraintBottom_toTopOf="@+id/bAdd"
+                app:layout_constraintEnd_toEndOf="@+id/bAdd"
+                app:layout_constraintStart_toStartOf="@+id/bAdd"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

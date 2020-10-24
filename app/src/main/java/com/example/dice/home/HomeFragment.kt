@@ -50,15 +50,19 @@ class HomeFragment : Fragment() {
 
         val replaceD4Button = binding.ibReplaceD4
         val replaceD6Button = binding.ibReplaceD6
+        val replaceD8Button = binding.ibReplaceD8
         val removeButton = binding.ibRemove
         val exitButton = binding.ibExit
 
         val clearButton = binding.bClear
         val rollButton = binding.bRoll
         val addButton = binding.bAdd
+        val totalText = binding.tvTotal
+        var total = 0
+        var modifier = 0
 
         for (die in dice) {
-            die.setupDieClicks(dice as MutableList<Die>, dieMenu, replaceD4Button, replaceD6Button, removeButton, exitButton)
+            die.setupDieClicks(dice as MutableList<Die>, dieMenu, replaceD4Button, replaceD6Button, replaceD8Button, removeButton, exitButton)
         }
 
         Die.setVisibility(dice as MutableList<Die>)
@@ -72,9 +76,15 @@ class HomeFragment : Fragment() {
                 activity?.runOnUiThread {
                     if (Die.roll(dice as MutableList<Die>) == 0) {
                         this.cancel()
+                        for (die in dice) {
+                            if (!die.visibility) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
+                        }
+                        total += modifier
+                        totalText.text = "Total: $total"
                     }
                 }
             }
+            total = 0
         }
 
         addButton.setOnClickListener {

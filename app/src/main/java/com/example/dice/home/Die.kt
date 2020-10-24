@@ -70,6 +70,7 @@ open class Die(
         dieMenu: ConstraintLayout,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
+        replaceD8Button: ImageButton,
         removeButton: ImageButton,
         exitButton: ImageButton
     ) {
@@ -84,6 +85,7 @@ open class Die(
                 dieMenu,
                 replaceD4Button,
                 replaceD6Button,
+                replaceD8Button,
                 removeButton,
                 exitButton
             )
@@ -96,6 +98,7 @@ open class Die(
         dieMenu: ConstraintLayout,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
+        replaceD8Button: ImageButton,
         removeButton: ImageButton,
         exitButton: ImageButton
     ) {
@@ -124,6 +127,18 @@ open class Die(
             dieMenu.visibility = View.GONE
         }
 
+        replaceD8Button.setOnClickListener {
+            dice.removeAt(selectedIndex)
+            dice.add(selectedIndex, D8(this.uiRepresentation))
+
+
+            resetBackground(dice)
+            dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d8__8)
+            dice[selectedIndex].visibility = true
+            setVisibility(dice)
+            dieMenu.visibility = View.GONE
+        }
+
         removeButton.setOnClickListener {
             resetBackground(dice)
             var lastVisibleIndex = 5
@@ -134,10 +149,10 @@ open class Die(
                 }
             }
 
-            println("lastVisibleIndex: $lastVisibleIndex")
-            println("selectedIndex: $selectedIndex")
+//            println("lastVisibleIndex: $lastVisibleIndex")
+//            println("selectedIndex: $selectedIndex")
             val steps = lastVisibleIndex - selectedIndex
-            println(dice)
+//            println(dice)
             for (i in 0 until steps) {
 //                val temp = dice[selectedIndex + i + 1]
 //
@@ -171,7 +186,7 @@ open class Die(
                 replaced.sides = replacement.sides
                 replaced.recentSides = replacement.recentSides
             }
-            println(dice)
+//            println(dice)
             dieMenu.visibility = View.GONE
             dice[lastVisibleIndex].visibility = false
             setVisibility(dice)
@@ -210,6 +225,24 @@ class D4(uiRepresentation: ImageView) : Die(
         R.drawable.d4__4
     ),
     mutableListOf(R.drawable.d4__4),
+    false,
+    uiRepresentation
+)
+
+class D8(uiRepresentation: ImageView) : Die(
+    8,
+    R.drawable.d8__8,
+    listOf(
+        R.drawable.d8__1,
+        R.drawable.d8__2,
+        R.drawable.d8__3,
+        R.drawable.d8__4,
+        R.drawable.d8__5,
+        R.drawable.d8__6,
+        R.drawable.d8__7,
+        R.drawable.d8__8
+    ),
+    mutableListOf(R.drawable.d8__8),
     false,
     uiRepresentation
 )
