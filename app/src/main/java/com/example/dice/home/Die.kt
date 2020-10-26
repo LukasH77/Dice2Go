@@ -269,11 +269,11 @@ open class Die(
 
         removeButton.setOnClickListener {
             resetBackground(dice)
-            var lastVisibleIndex = findLastVisibleIndex(dice)
+            val lastVisibleIndex = findLastVisibleIndex(dice)
 
 //            println("lastVisibleIndex: $lastVisibleIndex")
 //            println("selectedIndex: $selectedIndex")
-            val steps = lastVisibleIndex - selectedIndex
+            val steps = 5 - selectedIndex
 //            println(dice)
             for (i in 0 until steps) {
 //                val temp = dice[selectedIndex + i + 1]
@@ -308,6 +308,11 @@ open class Die(
                 replaced.sides = replacement.sides
                 replaced.recentSides = replacement.recentSides
                 replaced.isActive = replacement.isActive
+            }
+            when (addButton.text) {
+                "Add d4" -> dice[5] = D4(dice[5].uiRepresentation)
+                "Add d6" -> dice[5] = D6(dice[5].uiRepresentation)
+                "Add d8" -> dice[5] = D8(dice[5].uiRepresentation)
             }
 //            println(dice)
             dieMenu.visibility = View.GONE
