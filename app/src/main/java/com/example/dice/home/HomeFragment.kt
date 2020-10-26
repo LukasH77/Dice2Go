@@ -2,6 +2,7 @@ package com.example.dice.home
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.dice.R
 import com.example.dice.databinding.FragmentHomeBinding
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
@@ -24,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var dice: List<Die>
 
     private lateinit var dieMenu: ConstraintLayout
+    private lateinit var selectMenu: ConstraintLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,17 +50,28 @@ class HomeFragment : Fragment() {
             D6(binding.ivDie6)
         )
         dieMenu = binding.clPopup
+        selectMenu = binding.clSelectionPopup
 
         val replaceD4Button = binding.ibReplaceD4
         val replaceD6Button = binding.ibReplaceD6
         val replaceD8Button = binding.ibReplaceD8
         val removeButton = binding.ibRemove
+        val holdButton = binding.ibHold
         val exitButton = binding.ibExit
+
+        val addD4Button = binding.ibAddD4
+        val addD6Button = binding.ibAddD6
+        val addD8Button = binding.ibAddD8
+        val exitSelectButton = binding.ibExitSelect
 
         val clearButton = binding.bClear
         val rollButton = binding.bRoll
+        val selectButton = binding.bSelectDie
         val addButton = binding.bAdd
         val totalText = binding.tvTotal
+        val modifierText = binding.modifier
+        val modifierUpButton = binding.modifierUp
+        val modifierDownButton = binding.modifierDown
         var total = 0
         var modifier = 0
 
@@ -65,23 +79,54 @@ class HomeFragment : Fragment() {
             die.setupDieClicks(
                 dice as MutableList<Die>,
                 dieMenu,
+                selectMenu,
                 replaceD4Button,
                 replaceD6Button,
                 replaceD8Button,
                 removeButton,
-                exitButton
+                holdButton,
+                exitButton,
+                addButton,
+                selectButton
             )
         }
 
+        Die.setupSelectionMenu(
+            dice as MutableList<Die>,
+            addButton,
+            selectButton,
+            dieMenu,
+            selectMenu,
+            addD4Button,
+            addD6Button,
+            addD8Button,
+            exitSelectButton
+        )
+
         Die.setVisibility(dice as MutableList<Die>)
 
-
-//        //simulate first roll - doesn't fix the bug, but I think it makes it a bit better
+//        //simulate first roll - doesn't fix the lag, but I think it makes it a bit better
 //        Die.roll(dice as MutableList<Die>)
 
+        modifierUpButton.setOnClickListener {
+            modifier++
+            if (modifier >= 0) modifierText.text =
+                "+${modifier.toString()}" else modifierText.text = modifier.toString()
+        }
+
+        modifierDownButton.setOnClickListener {
+            modifier--
+            if (modifier >= 0) modifierText.text =
+                "+${modifier.toString()}" else modifierText.text = modifier.toString()
+        }
+
         rollButton.setOnClickListener {
-            Die.removeDieMenu(dieMenu)
+            Die.removeMenus(dieMenu, selectMenu)
             Die.resetBackground(dice as MutableList<Die>)
+
+            // avoids infinite roll when spamming the button
+            if (::timer.isInitialized) timer.cancel()
+
             Die.time = 6
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
@@ -90,7 +135,7 @@ class HomeFragment : Fragment() {
                         this.cancel()
                     }
                     for (die in dice) {
-                        if (!die.visibility) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
+                        if (!die.isVisible) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
                     }
                     total += modifier
                     totalText.text = "Total: $total"
@@ -99,30 +144,37 @@ class HomeFragment : Fragment() {
             }
         }
 
+        selectButton.setOnClickListener {
+            if (clSelectionPopup.visibility != View.VISIBLE) clSelectionPopup.visibility =
+                View.VISIBLE else Die.removeMenus(dieMenu, selectMenu)
+        }
+
         addButton.setOnClickListener {
-            Die.removeDieMenu(dieMenu)
+            Die.removeMenus(dieMenu, selectMenu)
             Die.resetBackground(dice as MutableList<Die>)
             for (die in dice) {
-                if (!die.visibility) {
+                if (!die.isVisible) {
                     Die.setVisibility(dice as MutableList<Die>)
-                    die.visibility = true
+                    die.isVisible = true
                     Die.setVisibility(dice as MutableList<Die>)
                     break
                 }
             }
+            Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
         }
 
         clearButton.setOnClickListener {
-            Die.removeDieMenu(dieMenu)
+            Die.removeMenus(dieMenu, selectMenu)
             Die.resetBackground(dice as MutableList<Die>)
             for (i in dice.indices) {
-                dice[i].visibility = false
+                dice[i].isVisible = false
             }
             Die.setVisibility(dice as MutableList<Die>)
+            Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
         }
 
         binding.clMain.setOnClickListener {
-            Die.removeDieMenu(dieMenu)
+            Die.removeMenus(dieMenu, selectMenu)
             Die.resetBackground(dice as MutableList<Die>)
         }
 
@@ -136,7 +188,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Die.removeDieMenu(dieMenu)
+        Die.removeMenus(dieMenu, selectMenu)
         Die.resetBackground(dice as MutableList<Die>)
         return NavigationUI.onNavDestinationSelected(
             item,

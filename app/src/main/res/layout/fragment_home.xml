@@ -170,7 +170,7 @@
                 app:layout_constraintGuide_begin="600dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clPopup"
+                android:id="@+id/clSelectionPopup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -187,40 +187,42 @@
                 tools:visibility="visible">
 
                 <ImageButton
-                    android:id="@+id/ibRemove"
+                    android:id="@+id/ibAddD4"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="16dp"
                     android:background="?colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@+id/ibExit"
-                    app:layout_constraintEnd_toEndOf="@+id/ibExit"
-                    app:layout_constraintStart_toStartOf="@+id/ibExit"
-                    app:srcCompat="@android:drawable/ic_menu_delete" />
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibAddD6"
+                    app:layout_constraintEnd_toEndOf="@+id/ibAddD6"
+                    app:layout_constraintStart_toStartOf="@+id/ibAddD6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/choose_d4" />
 
                 <ImageButton
-                    android:id="@+id/ibReplaceD6"
+                    android:id="@+id/ibAddD6"
                     android:layout_width="0dp"
                     android:layout_height="70dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toTopOf="@+id/ibReplaceD8"
-                    app:layout_constraintEnd_toEndOf="@+id/ibHold"
+                    app:layout_constraintBottom_toTopOf="@+id/ibAddD8"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/choose_d6" />
 
                 <ImageButton
-                    android:id="@+id/ibHold"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:id="@+id/ibAddD8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
                     android:background="?colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@+id/ibRemove"
-                    app:layout_constraintEnd_toEndOf="@+id/ibRemove"
-                    app:layout_constraintStart_toStartOf="@+id/ibRemove"
-                    app:srcCompat="@android:drawable/ic_media_pause" />
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibExitSelect"
+                    app:layout_constraintEnd_toEndOf="@+id/ibExitSelect"
+                    app:layout_constraintStart_toStartOf="@+id/ibExitSelect"
+                    app:srcCompat="@drawable/choose_d8" />
 
                 <ImageButton
-                    android:id="@+id/ibExit"
+                    android:id="@+id/ibExitSelect"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -229,6 +231,25 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@android:drawable/ic_delete" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clPopup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:background="?colorPrimary"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:visibility="gone">
 
                 <ImageButton
                     android:id="@+id/ibReplaceD4"
@@ -244,6 +265,17 @@
                     app:srcCompat="@drawable/choose_d4" />
 
                 <ImageButton
+                    android:id="@+id/ibReplaceD6"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibReplaceD8"
+                    app:layout_constraintEnd_toEndOf="@+id/ibHold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/choose_d6" />
+
+                <ImageButton
                     android:id="@+id/ibReplaceD8"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
@@ -253,6 +285,39 @@
                     app:layout_constraintEnd_toEndOf="@+id/ibHold"
                     app:layout_constraintStart_toStartOf="@+id/ibHold"
                     app:srcCompat="@drawable/choose_d8" />
+
+                <ImageButton
+                    android:id="@+id/ibHold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="?colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@+id/ibRemove"
+                    app:layout_constraintEnd_toEndOf="@+id/ibRemove"
+                    app:layout_constraintStart_toStartOf="@+id/ibRemove"
+                    app:srcCompat="@android:drawable/ic_media_pause" />
+
+                <ImageButton
+                    android:id="@+id/ibRemove"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="?colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@+id/ibExit"
+                    app:layout_constraintEnd_toEndOf="@+id/ibExit"
+                    app:layout_constraintStart_toStartOf="@+id/ibExit"
+                    app:srcCompat="@android:drawable/ic_menu_delete" />
+
+                <ImageButton
+                    android:id="@+id/ibExit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="?colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@android:drawable/ic_delete" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -267,44 +332,44 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/modifierDown"
                 android:layout_width="35dp"
                 android:layout_height="0dp"
                 android:background="#000000"
                 android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintBottom_toBottomOf="@+id/modifier"
+                app:layout_constraintEnd_toStartOf="@+id/modifier"
                 app:layout_constraintStart_toStartOf="@+id/bRoll"
-                app:layout_constraintTop_toTopOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/modifier"
                 app:srcCompat="@android:drawable/btn_minus" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/modifierUp"
                 android:layout_width="39dp"
                 android:layout_height="0dp"
                 android:background="@android:color/black"
                 android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                app:layout_constraintBottom_toBottomOf="@+id/modifier"
                 app:layout_constraintEnd_toEndOf="@+id/bRoll"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="@+id/textView4"
+                app:layout_constraintStart_toEndOf="@+id/modifier"
+                app:layout_constraintTop_toTopOf="@+id/modifier"
                 app:srcCompat="@android:drawable/btn_plus" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/modifier"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text=" +0"
                 app:layout_constraintBottom_toTopOf="@+id/bRoll"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-                app:layout_constraintStart_toEndOf="@+id/imageButton2"
+                app:layout_constraintEnd_toStartOf="@+id/modifierUp"
+                app:layout_constraintStart_toEndOf="@+id/modifierDown"
                 app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/bSelectDie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:enabled="false"
                 android:text="Select Die"
                 app:layout_constraintBottom_toTopOf="@+id/bAdd"
                 app:layout_constraintEnd_toEndOf="@+id/bAdd"
