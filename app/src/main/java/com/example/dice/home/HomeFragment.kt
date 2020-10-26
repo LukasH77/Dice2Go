@@ -76,8 +76,8 @@ class HomeFragment : Fragment() {
         Die.setVisibility(dice as MutableList<Die>)
 
 
-        //simulate first roll - doesn't fix the bug, but I think it makes it a bit better
-        Die.roll(dice as MutableList<Die>)
+//        //simulate first roll - doesn't fix the bug, but I think it makes it a bit better
+//        Die.roll(dice as MutableList<Die>)
 
         rollButton.setOnClickListener {
             Die.removeDieMenu(dieMenu)
