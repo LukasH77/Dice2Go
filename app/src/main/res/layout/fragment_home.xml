@@ -116,20 +116,20 @@
             <Button
                 android:id="@+id/bClear"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Clear"
+                app:backgroundTintMode="add"
                 app:layout_constraintBottom_toBottomOf="@+id/bRoll"
                 app:layout_constraintEnd_toStartOf="@+id/bRoll"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bRoll" />
+                app:layout_constraintTop_toTopOf="@+id/bAdd" />
 
             <Button
                 android:id="@+id/bRoll"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="69dp"
                 android:layout_marginEnd="16dp"
                 android:text="Roll"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -140,13 +140,15 @@
             <Button
                 android:id="@+id/bAdd"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="Add Die"
+                android:enabled="true"
+                android:text="Add"
+                app:backgroundTint="#FFE57F"
+                app:backgroundTintMode="add"
                 app:layout_constraintBottom_toBottomOf="@+id/bRoll"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/bRoll"
-                app:layout_constraintTop_toTopOf="@+id/bRoll" />
+                app:layout_constraintStart_toEndOf="@+id/bRoll" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -324,19 +326,22 @@
             <TextView
                 android:id="@+id/tvTotal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
                 android:text="Total:"
-                app:layout_constraintBottom_toTopOf="@+id/bClear"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"
                 app:layout_constraintEnd_toEndOf="@+id/bClear"
                 app:layout_constraintStart_toStartOf="@+id/bClear"
-                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />
 
             <ImageButton
                 android:id="@+id/modifierDown"
                 android:layout_width="35dp"
                 android:layout_height="0dp"
-                android:background="#000000"
+                android:background="?colorPrimary"
                 android:scaleType="fitCenter"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/modifier"
                 app:layout_constraintEnd_toStartOf="@+id/modifier"
                 app:layout_constraintStart_toStartOf="@+id/bRoll"
@@ -347,8 +352,9 @@
                 android:id="@+id/modifierUp"
                 android:layout_width="39dp"
                 android:layout_height="0dp"
-                android:background="@android:color/black"
+                android:background="?colorPrimary"
                 android:scaleType="fitCenter"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/modifier"
                 app:layout_constraintEnd_toEndOf="@+id/bRoll"
                 app:layout_constraintStart_toEndOf="@+id/modifier"
@@ -358,19 +364,23 @@
             <TextView
                 android:id="@+id/modifier"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:gravity="center"
+                android:inputType="number"
                 android:text=" +0"
-                app:layout_constraintBottom_toTopOf="@+id/bRoll"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"
                 app:layout_constraintEnd_toStartOf="@+id/modifierUp"
                 app:layout_constraintStart_toEndOf="@+id/modifierDown"
-                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />
 
             <Button
                 android:id="@+id/bSelectDie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Select Die"
+                android:text="Select"
+                app:backgroundTint="#FFFF8D"
+                app:backgroundTintMode="add"
                 app:layout_constraintBottom_toTopOf="@+id/bAdd"
                 app:layout_constraintEnd_toEndOf="@+id/bAdd"
                 app:layout_constraintStart_toStartOf="@+id/bAdd"

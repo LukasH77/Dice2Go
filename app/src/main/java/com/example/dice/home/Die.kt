@@ -150,7 +150,7 @@ open class Die(
         }
 
         fun handleButtons(dice: MutableList<Die>, addButton: Button, selectButton: Button) {
-            println("lastVisibleIndex: ${findLastVisibleIndex(dice)}")
+            println("lastVisibleIndex hb: ${findLastVisibleIndex(dice)}")
             when (findLastVisibleIndex(dice)) {
                 5 -> {
                     selectButton.isEnabled = false
@@ -192,6 +192,7 @@ open class Die(
         addButton: Button,
         selectButton: Button
     ) {
+        println("setting up die clicks")
         val selectedIndex = dice.indexOf(this)
         this.uiRepresentation.setOnClickListener {
 

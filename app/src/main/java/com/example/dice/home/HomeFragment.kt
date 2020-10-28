@@ -43,8 +43,8 @@ class HomeFragment : Fragment() {
 
         dice = mutableListOf(
             D6(binding.ivDie1),
-            D6(binding.ivDie2),
-            D6(binding.ivDie3),
+            D4(binding.ivDie2),
+            D8(binding.ivDie3),
             D6(binding.ivDie4),
             D6(binding.ivDie5),
             D6(binding.ivDie6)
@@ -105,8 +105,21 @@ class HomeFragment : Fragment() {
 
         Die.setVisibility(dice as MutableList<Die>)
 
-//        //simulate first roll - doesn't fix the lag, but I think it makes it a bit better
-//        Die.roll(dice as MutableList<Die>)
+        //simulate first rolls to avoid lag
+        //if database is empty or something, when dies are persistent this shouldn't happen
+        println("simulating die rolls")
+        repeat(2) {
+            if (::timer.isInitialized) timer.cancel()
+            Die.time = 3
+            timer = fixedRateTimer("timer", false, 0L, 50) {
+                activity?.runOnUiThread {
+                    if (Die.roll(dice as MutableList<Die>) == 0) {
+                        println("running")
+                        this.cancel()
+                    }
+                }
+            }
+        }
 
         modifierUpButton.setOnClickListener {
             modifier++
@@ -125,7 +138,7 @@ class HomeFragment : Fragment() {
             Die.resetBackground(dice as MutableList<Die>)
 
             // avoids infinite roll when spamming the button
-            if (::timer.isInitialized) timer.cancel()
+            timer.cancel()
 
             Die.time = 6
             timer = fixedRateTimer("timer", false, 0L, 50) {
@@ -171,6 +184,8 @@ class HomeFragment : Fragment() {
             }
             Die.setVisibility(dice as MutableList<Die>)
             Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
+            total = 0
+            totalText.text = "Total: "
         }
 
         binding.clMain.setOnClickListener {

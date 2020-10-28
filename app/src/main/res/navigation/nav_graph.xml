@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.dice.home.HomeFragment"
-        android:label="Dice Roller"
+        android:label="Die Rolling"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
