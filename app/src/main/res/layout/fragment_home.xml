@@ -33,7 +33,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline"
-                app:srcCompat="@drawable/d6__6" />
+                app:srcCompat="@drawable/d12__12" />
 
             <ImageView
                 android:id="@+id/ivDie6"
@@ -78,7 +78,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivDie3"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:srcCompat="@drawable/d6__6" />
+                app:srcCompat="@drawable/d10__10" />
 
             <ImageView
                 android:id="@+id/ivDie1"
@@ -208,12 +208,45 @@
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibAddD8"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ibAddD8"
+                    app:layout_constraintStart_toStartOf="@+id/ibAddD10"
                     app:srcCompat="@drawable/choose_d6" />
 
                 <ImageButton
                     android:id="@+id/ibAddD8"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibAddD10"
+                    app:layout_constraintEnd_toEndOf="@+id/ibAddD10"
+                    app:layout_constraintStart_toStartOf="@+id/ibAddD10"
+                    app:srcCompat="@drawable/choose_d8" />
+
+                <ImageButton
+                    android:id="@+id/ibAddD10"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibAddD12"
+                    app:layout_constraintEnd_toEndOf="@+id/ibAddD12"
+                    app:layout_constraintStart_toStartOf="@+id/ibAddD12"
+                    app:srcCompat="@drawable/choose_d10" />
+
+                <ImageButton
+                    android:id="@+id/ibAddD12"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibAddD20"
+                    app:layout_constraintEnd_toEndOf="@+id/ibAddD20"
+                    app:layout_constraintStart_toStartOf="@+id/ibAddD20"
+                    app:srcCompat="@drawable/choose_d12" />
+
+                <ImageButton
+                    android:id="@+id/ibAddD20"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:background="?colorPrimary"
@@ -221,7 +254,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/ibExitSelect"
                     app:layout_constraintEnd_toEndOf="@+id/ibExitSelect"
                     app:layout_constraintStart_toStartOf="@+id/ibExitSelect"
-                    app:srcCompat="@drawable/choose_d8" />
+                    app:srcCompat="@drawable/choose_d20" />
 
                 <ImageButton
                     android:id="@+id/ibExitSelect"
@@ -273,8 +306,8 @@
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibReplaceD8"
-                    app:layout_constraintEnd_toEndOf="@+id/ibHold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ibReplaceD8"
+                    app:layout_constraintStart_toStartOf="@+id/ibReplaceD8"
                     app:srcCompat="@drawable/choose_d6" />
 
                 <ImageButton
@@ -283,10 +316,43 @@
                     android:layout_height="70dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibReplaceD10"
+                    app:layout_constraintEnd_toEndOf="@+id/ibReplaceD10"
+                    app:layout_constraintStart_toStartOf="@+id/ibReplaceD10"
+                    app:srcCompat="@drawable/choose_d8" />
+
+                <ImageButton
+                    android:id="@+id/ibReplaceD10"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibReplaceD12"
+                    app:layout_constraintEnd_toEndOf="@+id/ibReplaceD12"
+                    app:layout_constraintStart_toStartOf="@+id/ibReplaceD12"
+                    app:srcCompat="@drawable/choose_d10" />
+
+                <ImageButton
+                    android:id="@+id/ibReplaceD12"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toTopOf="@+id/ibReplaceD20"
+                    app:layout_constraintEnd_toEndOf="@+id/ibReplaceD20"
+                    app:layout_constraintStart_toStartOf="@+id/ibReplaceD20"
+                    app:srcCompat="@drawable/choose_d12" />
+
+                <ImageButton
+                    android:id="@+id/ibReplaceD20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:background="?colorPrimary"
+                    android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibHold"
                     app:layout_constraintEnd_toEndOf="@+id/ibHold"
                     app:layout_constraintStart_toStartOf="@+id/ibHold"
-                    app:srcCompat="@drawable/choose_d8" />
+                    app:srcCompat="@drawable/choose_d20" />
 
                 <ImageButton
                     android:id="@+id/ibHold"

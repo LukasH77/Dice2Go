@@ -45,8 +45,8 @@ class HomeFragment : Fragment() {
             D6(binding.ivDie1),
             D4(binding.ivDie2),
             D8(binding.ivDie3),
-            D6(binding.ivDie4),
-            D6(binding.ivDie5),
+            D10(binding.ivDie4),
+            D12(binding.ivDie5),
             D6(binding.ivDie6)
         )
         dieMenu = binding.clPopup
@@ -55,6 +55,9 @@ class HomeFragment : Fragment() {
         val replaceD4Button = binding.ibReplaceD4
         val replaceD6Button = binding.ibReplaceD6
         val replaceD8Button = binding.ibReplaceD8
+        val replaceD10Button = binding.ibReplaceD10
+        val replaceD12Button = binding.ibReplaceD12
+        val replaceD20Button = binding.ibReplaceD20
         val removeButton = binding.ibRemove
         val holdButton = binding.ibHold
         val exitButton = binding.ibExit
@@ -62,6 +65,9 @@ class HomeFragment : Fragment() {
         val addD4Button = binding.ibAddD4
         val addD6Button = binding.ibAddD6
         val addD8Button = binding.ibAddD8
+        val addD10Button = binding.ibAddD10
+        val addD12Button = binding.ibAddD12
+        val addD20Button = binding.ibAddD20
         val exitSelectButton = binding.ibExitSelect
 
         val clearButton = binding.bClear
@@ -83,6 +89,9 @@ class HomeFragment : Fragment() {
                 replaceD4Button,
                 replaceD6Button,
                 replaceD8Button,
+                replaceD10Button,
+                replaceD12Button,
+                replaceD20Button,
                 removeButton,
                 holdButton,
                 exitButton,
@@ -100,6 +109,9 @@ class HomeFragment : Fragment() {
             addD4Button,
             addD6Button,
             addD8Button,
+            addD10Button,
+            addD12Button,
+            addD20Button,
             exitSelectButton
         )
 
@@ -140,7 +152,7 @@ class HomeFragment : Fragment() {
             // avoids infinite roll when spamming the button
             timer.cancel()
 
-            Die.time = 6
+            Die.time = 3
             timer = fixedRateTimer("timer", false, 0L, 50) {
                 activity?.runOnUiThread {
                     if (Die.roll(dice as MutableList<Die>) == 0) {

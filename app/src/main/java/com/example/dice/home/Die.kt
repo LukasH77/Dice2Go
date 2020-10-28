@@ -68,6 +68,9 @@ open class Die(
             addD4Button: ImageButton,
             addD6Button: ImageButton,
             addD8Button: ImageButton,
+            addD10Button: ImageButton,
+            addD12Button: ImageButton,
+            addD20Button: ImageButton,
             exitSelectButton: ImageButton
         ) {
             handleButtons(dice, addButton, selectButton)
@@ -133,6 +136,66 @@ open class Die(
                 addButton.text = "Add d8"
             }
 
+            addD10Button.setOnClickListener {
+                lastVisibleIndex = findLastVisibleIndex(dice)
+                println(lastVisibleIndex)
+                for (i in lastVisibleIndex until dice.lastIndex) {
+                    val addedDie = dice[i + 1]
+                    val modelDie = D10(addedDie.uiRepresentation)
+                    addedDie.uiRepresentation.setImageResource(modelDie.initialSide)
+                    addedDie.sidesAmount = modelDie.sidesAmount
+                    addedDie.initialSide = modelDie.initialSide
+                    addedDie.sides = modelDie.sides
+                    addedDie.recentSides = modelDie.recentSides
+                    addedDie.isActive = modelDie.isActive
+                }
+                dice[lastVisibleIndex + 1].isVisible = true
+                setVisibility(dice)
+                removeMenus(dieMenu, selectMenu)
+                handleButtons(dice, addButton, selectButton)
+                addButton.text = "Add d10"
+            }
+
+            addD12Button.setOnClickListener {
+                lastVisibleIndex = findLastVisibleIndex(dice)
+                println(lastVisibleIndex)
+                for (i in lastVisibleIndex until dice.lastIndex) {
+                    val addedDie = dice[i + 1]
+                    val modelDie = D12(addedDie.uiRepresentation)
+                    addedDie.uiRepresentation.setImageResource(modelDie.initialSide)
+                    addedDie.sidesAmount = modelDie.sidesAmount
+                    addedDie.initialSide = modelDie.initialSide
+                    addedDie.sides = modelDie.sides
+                    addedDie.recentSides = modelDie.recentSides
+                    addedDie.isActive = modelDie.isActive
+                }
+                dice[lastVisibleIndex + 1].isVisible = true
+                setVisibility(dice)
+                removeMenus(dieMenu, selectMenu)
+                handleButtons(dice, addButton, selectButton)
+                addButton.text = "Add d12"
+            }
+
+            addD20Button.setOnClickListener {
+//                lastVisibleIndex = findLastVisibleIndex(dice)
+//                println(lastVisibleIndex)
+//                for (i in lastVisibleIndex until dice.lastIndex) {
+//                    val addedDie = dice[i + 1]
+//                    val modelDie = D20(addedDie.uiRepresentation)
+//                    addedDie.uiRepresentation.setImageResource(modelDie.initialSide)
+//                    addedDie.sidesAmount = modelDie.sidesAmount
+//                    addedDie.initialSide = modelDie.initialSide
+//                    addedDie.sides = modelDie.sides
+//                    addedDie.recentSides = modelDie.recentSides
+//                    addedDie.isActive = modelDie.isActive
+//                }
+//                dice[lastVisibleIndex + 1].isVisible = true
+//                setVisibility(dice)
+//                removeMenus(dieMenu, selectMenu)
+//                handleButtons(dice, addButton, selectButton)
+//                addButton.text = "Add d20"
+            }
+
             exitSelectButton.setOnClickListener {
                 removeMenus(dieMenu, selectMenu)
             }
@@ -186,6 +249,9 @@ open class Die(
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         replaceD8Button: ImageButton,
+        replaceD10Button: ImageButton,
+        replaceD12Button: ImageButton,
+        replaceD20Button: ImageButton,
         removeButton: ImageButton,
         holdButton: ImageButton,
         exitButton: ImageButton,
@@ -210,6 +276,9 @@ open class Die(
                 replaceD4Button,
                 replaceD6Button,
                 replaceD8Button,
+                replaceD10Button,
+                replaceD12Button,
+                replaceD20Button,
                 removeButton,
                 holdButton,
                 exitButton,
@@ -227,6 +296,9 @@ open class Die(
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         replaceD8Button: ImageButton,
+        replaceD10Button: ImageButton,
+        replaceD12Button: ImageButton,
+        replaceD20Button: ImageButton,
         removeButton: ImageButton,
         holdButton: ImageButton,
         exitButton: ImageButton,
@@ -237,6 +309,7 @@ open class Die(
         replaceD4Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D4(this.uiRepresentation))
+
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d4__4)
             dice[selectedIndex].isVisible = true
@@ -266,6 +339,42 @@ open class Die(
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
+        }
+
+        replaceD10Button.setOnClickListener {
+            dice.removeAt(selectedIndex)
+            dice.add(selectedIndex, D10(this.uiRepresentation))
+
+
+            resetBackground(dice)
+            dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d10__10)
+            dice[selectedIndex].isVisible = true
+            setVisibility(dice)
+            dieMenu.visibility = View.GONE
+        }
+
+        replaceD12Button.setOnClickListener {
+            dice.removeAt(selectedIndex)
+            dice.add(selectedIndex, D12(this.uiRepresentation))
+
+
+            resetBackground(dice)
+            dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d12__12)
+            dice[selectedIndex].isVisible = true
+            setVisibility(dice)
+            dieMenu.visibility = View.GONE
+        }
+
+        replaceD20Button.setOnClickListener {
+//            dice.removeAt(selectedIndex)
+//            dice.add(selectedIndex, D20(this.uiRepresentation))
+//
+//
+//            resetBackground(dice)
+//            dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d20__20)
+//            dice[selectedIndex].isVisible = true
+//            setVisibility(dice)
+//            dieMenu.visibility = View.GONE
         }
 
         removeButton.setOnClickListener {
@@ -393,6 +502,50 @@ class D8(uiRepresentation: ImageView) : Die(
         R.drawable.d8__8
     ),
     mutableListOf(R.drawable.d8__8),
+    false,
+    true,
+    uiRepresentation
+)
+
+class D10(uiRepresentation: ImageView) : Die(
+    10,
+    R.drawable.d10__10,
+    listOf(
+        R.drawable.d10__1,
+        R.drawable.d10__2,
+        R.drawable.d10__3,
+        R.drawable.d10__4,
+        R.drawable.d10__5,
+        R.drawable.d10__6,
+        R.drawable.d10__7,
+        R.drawable.d10__8,
+        R.drawable.d10__9,
+        R.drawable.d10__10
+    ),
+    mutableListOf(R.drawable.d10__10),
+    false,
+    true,
+    uiRepresentation
+)
+
+class D12(uiRepresentation: ImageView) : Die(
+    12,
+    R.drawable.d12__12,
+    listOf(
+        R.drawable.d12__1,
+        R.drawable.d12__2,
+        R.drawable.d12__3,
+        R.drawable.d12__4,
+        R.drawable.d12__5,
+        R.drawable.d12__6,
+        R.drawable.d12__7,
+        R.drawable.d12__8,
+        R.drawable.d12__9,
+        R.drawable.d12__10,
+        R.drawable.d12__11,
+        R.drawable.d12__12
+    ),
+    mutableListOf(R.drawable.d12__12),
     false,
     true,
     uiRepresentation
