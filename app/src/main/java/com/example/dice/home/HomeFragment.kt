@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
             D8(binding.ivDie3),
             D10(binding.ivDie4),
             D12(binding.ivDie5),
-            D6(binding.ivDie6)
+            D20(binding.ivDie6)
         )
         dieMenu = binding.clPopup
         selectMenu = binding.clSelectionPopup
