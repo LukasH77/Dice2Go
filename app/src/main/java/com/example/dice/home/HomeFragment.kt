@@ -1,9 +1,16 @@
 package com.example.dice.home
 
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.media.SoundPool
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.*
-import android.widget.ImageButton
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var dieMenu: ConstraintLayout
     private lateinit var selectMenu: ConstraintLayout
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,6 +89,10 @@ class HomeFragment : Fragment() {
         var total = 0
         var modifier = 0
 
+        val rollingBuzzer = activity?.getSystemService<Vibrator>()
+
+        val rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
+
         for (die in dice) {
             die.setupDieClicks(
                 dice as MutableList<Die>,
@@ -117,21 +129,21 @@ class HomeFragment : Fragment() {
 
         Die.setVisibility(dice as MutableList<Die>)
 
-        //simulate first rolls to avoid lag
-        //if database is empty or something, when dies are persistent this shouldn't happen
-        println("simulating die rolls")
-        repeat(2) {
-            if (::timer.isInitialized) timer.cancel()
-            Die.time = 3
-            timer = fixedRateTimer("timer", false, 0L, 50) {
-                activity?.runOnUiThread {
-                    if (Die.roll(dice as MutableList<Die>) == 0) {
-                        println("running")
-                        this.cancel()
-                    }
-                }
-            }
-        }
+//        //simulate first rolls to avoid lag
+//        //if database is empty or something, when dies are persistent this shouldn't happen
+//        println("simulating die rolls")
+//        repeat(2) {
+//            if (::timer.isInitialized) timer.cancel()
+//            Die.time = 3
+//            timer = fixedRateTimer("timer", false, 0L, 100) {
+//                activity?.runOnUiThread {
+//                    if (Die.roll(dice as MutableList<Die>) == 0) {
+//                        println("running")
+//                        this.cancel()
+//                    }
+//                }
+//            }
+//        }
 
         modifierUpButton.setOnClickListener {
             modifier++
@@ -150,10 +162,19 @@ class HomeFragment : Fragment() {
             Die.resetBackground(dice as MutableList<Die>)
 
             // avoids infinite roll when spamming the button
-            timer.cancel()
+            if (::timer.isInitialized) timer.cancel()
+            Die.time = 8
 
-            Die.time = 3
-            timer = fixedRateTimer("timer", false, 0L, 50) {
+            val vibePattern = LongArray(2)
+            vibePattern[0] = 0
+            vibePattern[1] = 125 * 2
+
+            if (dice[0].isVisible) {
+                rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
+                rollingSound.start()
+            }
+
+            timer = fixedRateTimer("timer", false, 0, 125) {
                 activity?.runOnUiThread {
                     if (Die.roll(dice as MutableList<Die>) == 0) {
                         println("running")
@@ -170,8 +191,8 @@ class HomeFragment : Fragment() {
         }
 
         selectButton.setOnClickListener {
-            if (clSelectionPopup.visibility != View.VISIBLE) clSelectionPopup.visibility =
-                View.VISIBLE else Die.removeMenus(dieMenu, selectMenu)
+            clSelectionPopup.visibility = View.VISIBLE
+            clPopup.visibility = View.GONE
         }
 
         addButton.setOnClickListener {
@@ -197,7 +218,9 @@ class HomeFragment : Fragment() {
             Die.setVisibility(dice as MutableList<Die>)
             Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
             total = 0
+            clSelectionPopup.visibility = View.VISIBLE
             totalText.text = "Total: "
+            addButton.text = "Add "
         }
 
         binding.clMain.setOnClickListener {
