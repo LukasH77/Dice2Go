@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         val replaceD12Button = binding.ibReplaceD12
         val replaceD20Button = binding.ibReplaceD20
         val removeButton = binding.ibRemove
-        val holdButton = binding.ibHold
+//        val holdButton = binding.ibHold
         val exitButton = binding.ibExit
 
         val addD4Button = binding.ibAddD4
@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
                 replaceD12Button,
                 replaceD20Button,
                 removeButton,
-                holdButton,
+//                holdButton,
                 exitButton,
                 addButton,
                 selectButton
@@ -196,6 +196,8 @@ class HomeFragment : Fragment() {
         }
 
         addButton.setOnClickListener {
+            Die.removeMenus(dieMenu, selectMenu)
+            Die.removeMenus(dieMenu, selectMenu)
             Die.removeMenus(dieMenu, selectMenu)
             Die.resetBackground(dice as MutableList<Die>)
             for (die in dice) {

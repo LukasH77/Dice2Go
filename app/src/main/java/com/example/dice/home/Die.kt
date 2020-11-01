@@ -253,7 +253,7 @@ open class Die(
         replaceD12Button: ImageButton,
         replaceD20Button: ImageButton,
         removeButton: ImageButton,
-        holdButton: ImageButton,
+//        holdButton: ImageButton,
         exitButton: ImageButton,
         addButton: Button,
         selectButton: Button
@@ -265,9 +265,9 @@ open class Die(
             resetBackground(dice)
             this.uiRepresentation.setBackgroundResource(R.color.primaryColor)
             dieMenu.visibility = View.VISIBLE
-            if (this.isActive) holdButton.setImageResource(android.R.drawable.ic_media_pause) else holdButton.setImageResource(
-                android.R.drawable.ic_media_play
-            )
+//            if (this.isActive) holdButton.setImageResource(android.R.drawable.ic_media_pause) else holdButton.setImageResource(
+//                android.R.drawable.ic_media_play
+//            )
             addOrRemove(
                 selectedIndex,
                 dice,
@@ -280,7 +280,7 @@ open class Die(
                 replaceD12Button,
                 replaceD20Button,
                 removeButton,
-                holdButton,
+//                holdButton,
                 exitButton,
                 addButton,
                 selectButton
@@ -300,7 +300,7 @@ open class Die(
         replaceD12Button: ImageButton,
         replaceD20Button: ImageButton,
         removeButton: ImageButton,
-        holdButton: ImageButton,
+//        holdButton: ImageButton,
         exitButton: ImageButton,
         addButton: Button,
         selectButton: Button
@@ -309,7 +309,7 @@ open class Die(
         replaceD4Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D4(this.uiRepresentation))
-
+//            println("${this.recentSides}")
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d4__4)
             dice[selectedIndex].isVisible = true
@@ -428,26 +428,28 @@ open class Die(
             dieMenu.visibility = View.GONE
             dice[lastVisibleIndex].isVisible = false
             setVisibility(dice)
-            handleButtons(dice, addButton, selectButton)
+//            handleButtons(dice, addButton, selectButton)
         }
 
-        holdButton.setOnClickListener {
-            if (this.isActive) {
-                holdButton.setImageResource(android.R.drawable.ic_media_pause)
-                this.isActive = false
-                this.uiRepresentation.setImageResource(android.R.drawable.ic_lock_idle_lock)
-                holdButton.setImageResource(android.R.drawable.ic_media_play)
-                resetBackground(dice)
-                removeMenus(dieMenu, selectMenu)
-            } else {
-                holdButton.setImageResource(android.R.drawable.ic_media_play)
-                this.isActive = true
-                this.uiRepresentation.setImageResource(this.recentSides.last())
-                holdButton.setImageResource(android.R.drawable.ic_media_pause)
-                resetBackground(dice)
-                removeMenus(dieMenu, selectMenu)
-            }
-        }
+//        holdButton.setOnClickListener {
+//            if (this.isActive) {
+//                holdButton.setImageResource(android.R.drawable.ic_media_pause)
+//                this.isActive = false
+//                this.uiRepresentation.setImageResource(android.R.drawable.ic_lock_idle_lock)
+//                holdButton.setImageResource(android.R.drawable.ic_media_play)
+//                resetBackground(dice)
+//                removeMenus(dieMenu, selectMenu)
+//            } else {
+//                holdButton.setImageResource(android.R.drawable.ic_media_play)
+//                this.isActive = true
+//                this.uiRepresentation.setImageResource(this.recentSides.last())
+//                println(this.recentSides.last())
+//                println(this.recentSides)
+//                holdButton.setImageResource(android.R.drawable.ic_media_pause)
+//                resetBackground(dice)
+//                removeMenus(dieMenu, selectMenu)
+//            }
+//        }
 
         exitButton.setOnClickListener {
             removeMenus(dieMenu, selectMenu)

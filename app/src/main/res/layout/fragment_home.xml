@@ -277,14 +277,13 @@
                 android:layout_marginTop="2dp"
                 android:background="?colorPrimary"
                 android:orientation="horizontal"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:visibility="gone">
+                app:layout_constraintVertical_bias="0.0">
 
                 <ImageButton
                     android:id="@+id/ibReplaceD4"
@@ -349,21 +348,21 @@
                     android:layout_height="70dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toTopOf="@+id/ibHold"
-                    app:layout_constraintEnd_toEndOf="@+id/ibHold"
-                    app:layout_constraintStart_toStartOf="@+id/ibHold"
-                    app:srcCompat="@drawable/choose_d20" />
-
-                <ImageButton
-                    android:id="@+id/ibHold"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="?colorPrimary"
                     app:layout_constraintBottom_toTopOf="@+id/ibRemove"
                     app:layout_constraintEnd_toEndOf="@+id/ibRemove"
                     app:layout_constraintStart_toStartOf="@+id/ibRemove"
-                    app:srcCompat="@android:drawable/ic_media_pause" />
+                    app:srcCompat="@drawable/choose_d20" />
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/ibHold"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:background="?colorPrimary"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/ibRemove"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/ibRemove"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/ibRemove"-->
+<!--                    app:srcCompat="@android:drawable/ic_media_pause" />-->
 
                 <ImageButton
                     android:id="@+id/ibRemove"
