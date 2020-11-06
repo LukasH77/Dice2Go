@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.*
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.getSystemService
@@ -34,6 +35,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var dieMenu: ConstraintLayout
     private lateinit var selectMenu: ConstraintLayout
+    private lateinit var hintText: TextView
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -59,6 +61,7 @@ class HomeFragment : Fragment() {
         )
         dieMenu = binding.clPopup
         selectMenu = binding.clSelectionPopup
+        hintText = binding.tvHint
 
         val replaceD4Button = binding.ibReplaceD4
         val replaceD6Button = binding.ibReplaceD6
@@ -98,6 +101,7 @@ class HomeFragment : Fragment() {
                 dice as MutableList<Die>,
                 dieMenu,
                 selectMenu,
+                hintText,
                 replaceD4Button,
                 replaceD6Button,
                 replaceD8Button,
@@ -116,6 +120,7 @@ class HomeFragment : Fragment() {
             dice as MutableList<Die>,
             addButton,
             selectButton,
+            hintText,
             dieMenu,
             selectMenu,
             addD4Button,
@@ -158,7 +163,7 @@ class HomeFragment : Fragment() {
         }
 
         rollButton.setOnClickListener {
-            Die.removeMenus(dieMenu, selectMenu)
+            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
 
             // avoids infinite roll when spamming the button
@@ -193,12 +198,13 @@ class HomeFragment : Fragment() {
         selectButton.setOnClickListener {
             clSelectionPopup.visibility = View.VISIBLE
             clPopup.visibility = View.GONE
+            if (!dice[0].isVisible) hintText.visibility = View.VISIBLE
         }
 
         addButton.setOnClickListener {
-            Die.removeMenus(dieMenu, selectMenu)
-            Die.removeMenus(dieMenu, selectMenu)
-            Die.removeMenus(dieMenu, selectMenu)
+            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
+            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
+            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             for (die in dice) {
                 if (!die.isVisible) {
@@ -212,7 +218,7 @@ class HomeFragment : Fragment() {
         }
 
         clearButton.setOnClickListener {
-            Die.removeMenus(dieMenu, selectMenu)
+            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             for (i in dice.indices) {
                 dice[i].isVisible = false
@@ -221,12 +227,13 @@ class HomeFragment : Fragment() {
             Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
             total = 0
             clSelectionPopup.visibility = View.VISIBLE
+            hintText.visibility = View.VISIBLE
             totalText.text = "Total: "
             addButton.text = "Add "
         }
 
         binding.clMain.setOnClickListener {
-            Die.removeMenus(dieMenu, selectMenu)
+            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
         }
 
@@ -240,7 +247,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Die.removeMenus(dieMenu, selectMenu)
+        Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
         Die.resetBackground(dice as MutableList<Die>)
         return NavigationUI.onNavDestinationSelected(
             item,

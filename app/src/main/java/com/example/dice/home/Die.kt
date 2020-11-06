@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.dice.R
 
@@ -63,6 +64,7 @@ open class Die(
             dice: MutableList<Die>,
             addButton: Button,
             selectButton: Button,
+            hintText: TextView,
             dieMenu: ConstraintLayout,
             selectMenu: ConstraintLayout,
             addD4Button: ImageButton,
@@ -91,7 +93,7 @@ open class Die(
                 }
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
-                removeMenus(dieMenu, selectMenu)
+                removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d4"
             }
@@ -111,7 +113,7 @@ open class Die(
                 }
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
-                removeMenus(dieMenu, selectMenu)
+                removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d6"
             }
@@ -131,7 +133,7 @@ open class Die(
                 }
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
-                removeMenus(dieMenu, selectMenu)
+                removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d8"
             }
@@ -151,7 +153,7 @@ open class Die(
                 }
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
-                removeMenus(dieMenu, selectMenu)
+                removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d10"
             }
@@ -171,7 +173,7 @@ open class Die(
                 }
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
-                removeMenus(dieMenu, selectMenu)
+                removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d12"
             }
@@ -191,19 +193,23 @@ open class Die(
                 }
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
-                removeMenus(dieMenu, selectMenu)
+                removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d20"
             }
 
             exitSelectButton.setOnClickListener {
-                removeMenus(dieMenu, selectMenu)
+                selectMenu.visibility = View.GONE
+                hintText.visibility = View.GONE
+//                removeMenus(dice, dieMenu, selectMenu, hintText)
             }
         }
 
-        fun removeMenus(dieMenu: ConstraintLayout, selectMenu: ConstraintLayout) {
+        fun removeMenus(dice: MutableList<Die>, dieMenu: ConstraintLayout, selectMenu: ConstraintLayout, hintText: TextView) {
+            if (!dice[0].isVisible) return
             dieMenu.visibility = View.GONE
             selectMenu.visibility = View.GONE
+            hintText.visibility = View.GONE
         }
 
         fun resetBackground(dice: MutableList<Die>) {
@@ -246,6 +252,7 @@ open class Die(
         dice: MutableList<Die>,
         dieMenu: ConstraintLayout,
         selectMenu: ConstraintLayout,
+        hintText: TextView,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         replaceD8Button: ImageButton,
@@ -273,6 +280,7 @@ open class Die(
                 dice,
                 dieMenu,
                 selectMenu,
+                hintText,
                 replaceD4Button,
                 replaceD6Button,
                 replaceD8Button,
@@ -293,6 +301,7 @@ open class Die(
         dice: MutableList<Die>,
         dieMenu: ConstraintLayout,
         selectMenu: ConstraintLayout,
+        hintText: TextView,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         replaceD8Button: ImageButton,
@@ -429,6 +438,10 @@ open class Die(
             dice[lastVisibleIndex].isVisible = false
             setVisibility(dice)
 //            handleButtons(dice, addButton, selectButton)
+            if (!dice[0].isVisible) {
+                selectMenu.visibility = View.VISIBLE
+                hintText.visibility = View.VISIBLE
+            }
         }
 
 //        holdButton.setOnClickListener {
@@ -452,7 +465,7 @@ open class Die(
 //        }
 
         exitButton.setOnClickListener {
-            removeMenus(dieMenu, selectMenu)
+            removeMenus(dice, dieMenu, selectMenu, hintText)
             resetBackground(dice)
         }
     }
