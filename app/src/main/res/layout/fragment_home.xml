@@ -23,7 +23,6 @@
                 android:id="@+id/ivDie1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:visibility="visible"
@@ -31,10 +30,10 @@
                 app:layout_constraintDimensionRatio="h,1:1"
                 app:layout_constraintEnd_toStartOf="@+id/ivDie2"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/d4__4"
-                tools:visibility="gone"/>
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/ivDie2"
@@ -42,54 +41,49 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:visibility="visible"
-                tools:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
                 app:layout_constraintDimensionRatio="h,1:1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/ivDie1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.48"
-                app:srcCompat="@drawable/d6__6" />
+                app:srcCompat="@drawable/d6__6"
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/ivDie3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:visibility="visible"
-                tools:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintDimensionRatio="h,1:1"
                 app:layout_constraintEnd_toStartOf="@+id/ivDie4"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:srcCompat="@drawable/d8__8" />
+                app:srcCompat="@drawable/d8__8"
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/ivDie4"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
                 app:layout_constraintStart_toEndOf="@+id/ivDie3"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:srcCompat="@drawable/d10__10"
-                tools:visibility="gone"/>
+                app:srcCompat="@drawable/d6__6"
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/ivDie5"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:visibility="visible"
@@ -97,7 +91,7 @@
                 app:layout_constraintDimensionRatio="h,1:1"
                 app:layout_constraintEnd_toStartOf="@+id/ivDie6"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="@+id/guideline"
                 app:srcCompat="@drawable/d12__12" />
 
@@ -106,12 +100,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintDimensionRatio="h,1:1"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/ivDie5"
                 app:layout_constraintTop_toTopOf="@+id/guideline"
@@ -179,8 +172,6 @@
                 android:id="@+id/clSelectionPopup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
                 android:background="?colorPrimary"
                 android:orientation="horizontal"
                 android:visibility="visible"
@@ -190,7 +181,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <ImageButton
                     android:id="@+id/ibAddD4"
@@ -277,8 +268,6 @@
                 android:id="@+id/clPopup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
                 android:background="?colorPrimary"
                 android:orientation="horizontal"
                 android:visibility="gone"
@@ -462,11 +451,26 @@
                 android:layout_marginEnd="8dp"
                 android:background="?colorPrimary"
                 android:padding="2dp"
+                tools:visibility="gone"
                 android:text="@string/short_hint"
                 app:layout_constraintBottom_toBottomOf="@+id/clSelectionPopup"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/clSelectionPopup"
                 app:layout_constraintTop_toTopOf="@+id/clSelectionPopup" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

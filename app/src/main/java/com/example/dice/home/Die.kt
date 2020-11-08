@@ -1,11 +1,11 @@
 package com.example.dice.home
 
+import android.content.Context
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.ViewGroup
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginRight
 import com.example.dice.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -23,9 +23,27 @@ open class Die(
         var time = 0
 
         fun setVisibility(dice: MutableList<Die>) {
+            val lastVisibleIndex = findLastVisibleIndex(dice)
+
             for (die in dice) {
+//                val param = die.uiRepresentation.layoutParams as ViewGroup.MarginLayoutParams
+
                 if (die.isVisible) {
                     die.uiRepresentation.visibility = View.VISIBLE
+
+//                    if (dice.indexOf(die) % 2 == 0 && dice.indexOf(die) == lastVisibleIndex) {
+//                        param.setMargins(0, 0, 0, 0)
+//                        die.uiRepresentation.layoutParams = param
+//                    } else {
+//                        if (dice.indexOf(die) % 2 == 0) {
+//                            param.rightMargin = 8
+//                            die.uiRepresentation.layoutParams = param
+//                        } else {
+//                            param.leftMargin = 8
+//                            die.uiRepresentation.layoutParams = param
+//                        }
+//                    }
+
                 } else {
                     die.uiRepresentation.visibility = View.GONE
                     die.uiRepresentation.setImageResource(die.initialSide)
@@ -423,10 +441,11 @@ open class Die(
             if (!dice[0].isVisible) {
                 selectMenu.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
-                handleButtons(dice, addButton, selectButton)
                 hintText.visibility = View.VISIBLE
+                println("fault")
                 addButton.text = "Add "
             }
+            handleButtons(dice, addButton, selectButton)
             totalText.text = "Total: "
         }
 
