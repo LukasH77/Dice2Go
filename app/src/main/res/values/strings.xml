@@ -1,21 +1,25 @@
 <resources>
     <string name="app_name">Die Rolling</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="long_hint">This is the select menu.
-        \nClicking any type of die will select it and add one of it.
-        \nClick the Add button to add an additional die of the selected type.
-        \nClick the Select button to reopen the menu and select another type of die.
-        \nClick a die to replace or remove it.
-        \nCheck out the help screen for more info.</string>
     <string name="short_hint">This is the select menu, it opens when
-        \nthe screen is empty or when you click
+        \nno dice are on screen or when you tap
         \nthe \"SELECT\" button.
         \nSelect a type of die from the menu to add it.
         \n
-        \nClick the \"ADD\" button to add more of your
+        \nTap the \"ADD\" button to add more of your
         \nselected type.
         \n
-        \nClick a die to replace or remove it.
+        \nTap a die to replace or remove it.
         \n
         \nWhen you\'re ready - start rolling!</string>
+    <string name="about_the_app">
+        This app is inspired by the Android Developer Course on Udacity as well as Critical Roll.
+        \n
+        \nThe die symbols in the menus are by Lonnie Tapscott from the Noun Project.</string>
+    <string name="about_me">
+        I\'m from Germany and currently studying on my own after recently finishing school and soon starting to study at university. [Q4 2020]
+        \n
+        \nYou can find me on GitHub: --------
+        \n
+        \nBug reports, feedback or other messages can be either left as a review n the Play Store or via mail : --------</string>
 </resources>

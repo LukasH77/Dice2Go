@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.dice.R
+import kotlinx.android.synthetic.main.fragment_home.*
 
 open class Die(
     var sidesAmount: Int,
@@ -65,6 +66,7 @@ open class Die(
             addButton: Button,
             selectButton: Button,
             hintText: TextView,
+            totalText: TextView,
             dieMenu: ConstraintLayout,
             selectMenu: ConstraintLayout,
             addD4Button: ImageButton,
@@ -96,6 +98,7 @@ open class Die(
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d4"
+                totalText.text = "Total: "
             }
 
             addD6Button.setOnClickListener {
@@ -116,6 +119,7 @@ open class Die(
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d6"
+                totalText.text = "Total: "
             }
 
             addD8Button.setOnClickListener {
@@ -136,6 +140,7 @@ open class Die(
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d8"
+                totalText.text = "Total: "
             }
 
             addD10Button.setOnClickListener {
@@ -156,6 +161,7 @@ open class Die(
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d10"
+                totalText.text = "Total: "
             }
 
             addD12Button.setOnClickListener {
@@ -176,6 +182,7 @@ open class Die(
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d12"
+                totalText.text = "Total: "
             }
 
             addD20Button.setOnClickListener {
@@ -196,6 +203,7 @@ open class Die(
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
                 addButton.text = "Add d20"
+                totalText.text = "Total: "
             }
 
             exitSelectButton.setOnClickListener {
@@ -205,7 +213,12 @@ open class Die(
             }
         }
 
-        fun removeMenus(dice: MutableList<Die>, dieMenu: ConstraintLayout, selectMenu: ConstraintLayout, hintText: TextView) {
+        fun removeMenus(
+            dice: MutableList<Die>,
+            dieMenu: ConstraintLayout,
+            selectMenu: ConstraintLayout,
+            hintText: TextView
+        ) {
             if (!dice[0].isVisible) return
             dieMenu.visibility = View.GONE
             selectMenu.visibility = View.GONE
@@ -253,6 +266,7 @@ open class Die(
         dieMenu: ConstraintLayout,
         selectMenu: ConstraintLayout,
         hintText: TextView,
+        totalText: TextView,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         replaceD8Button: ImageButton,
@@ -268,7 +282,6 @@ open class Die(
         println("setting up die clicks")
         val selectedIndex = dice.indexOf(this)
         this.uiRepresentation.setOnClickListener {
-
             resetBackground(dice)
             this.uiRepresentation.setBackgroundResource(R.color.primaryColor)
             dieMenu.visibility = View.VISIBLE
@@ -281,6 +294,7 @@ open class Die(
                 dieMenu,
                 selectMenu,
                 hintText,
+                totalText,
                 replaceD4Button,
                 replaceD6Button,
                 replaceD8Button,
@@ -302,6 +316,7 @@ open class Die(
         dieMenu: ConstraintLayout,
         selectMenu: ConstraintLayout,
         hintText: TextView,
+        totalText: TextView,
         replaceD4Button: ImageButton,
         replaceD6Button: ImageButton,
         replaceD8Button: ImageButton,
@@ -318,106 +333,75 @@ open class Die(
         replaceD4Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D4(this.uiRepresentation))
-//            println("${this.recentSides}")
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d4__4)
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
+            totalText.text = "Total: "
         }
 
         replaceD6Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D6(this.uiRepresentation))
-
-
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d6__6)
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
+            totalText.text = "Total: "
         }
 
         replaceD8Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D8(this.uiRepresentation))
-
-
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d8__8)
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
+            totalText.text = "Total: "
         }
 
         replaceD10Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D10(this.uiRepresentation))
-
-
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d10__10)
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
+            totalText.text = "Total: "
         }
 
         replaceD12Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D12(this.uiRepresentation))
-
-
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d12__12)
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
+            totalText.text = "Total: "
         }
 
         replaceD20Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D20(this.uiRepresentation))
-
-
             resetBackground(dice)
             dice[selectedIndex].uiRepresentation.setImageResource(R.drawable.d20__20)
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
+            totalText.text = "Total: "
         }
 
         removeButton.setOnClickListener {
             resetBackground(dice)
             val lastVisibleIndex = findLastVisibleIndex(dice)
 
-//            println("lastVisibleIndex: $lastVisibleIndex")
-//            println("selectedIndex: $selectedIndex")
             val steps = 5 - selectedIndex
-//            println(dice)
             for (i in 0 until steps) {
-//                val temp = dice[selectedIndex + i + 1]
-//
-//                dice.removeAt(selectedIndex + i)
-//
-//                when (temp) {
-//                    is D4 -> {
-//                        println("d4")
-//                        dice.add(selectedIndex + i, D4(temp.uiRepresentation))
-//                        dice[selectedIndex + i].visibility = temp.visibility
-//                    }
-//                    is D6 -> {
-//                        println("d6")
-//                        dice.add(selectedIndex + i, D6(temp.uiRepresentation))
-//                        dice[selectedIndex + i].visibility = temp.visibility
-//                    }
-//                }
-//                println("temp2: $temp2")
-//
-//                temp2.uiRepresentation = temp1.uiRepresentation
-//                                println("${temp.recentSides}")
-//                dice[selectedIndex+ i] = dice[selectedIndex + i + 1]
-
-                //TODO This is basically cheating ... but it works!!!! Makes the subclasses a bit redundant..they're still used for replacements though, keep them in. It works. :D
                 // Not the prettiest solution, gotta admit that. OR IS IT?!
                 val replaced = dice[selectedIndex + i]
                 val replacement = dice[selectedIndex + i + 1]
@@ -433,15 +417,17 @@ open class Die(
                 "Add d6" -> dice[5] = D6(dice[5].uiRepresentation)
                 "Add d8" -> dice[5] = D8(dice[5].uiRepresentation)
             }
-//            println(dice)
             dieMenu.visibility = View.GONE
             dice[lastVisibleIndex].isVisible = false
             setVisibility(dice)
-//            handleButtons(dice, addButton, selectButton)
             if (!dice[0].isVisible) {
                 selectMenu.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
+                handleButtons(dice, addButton, selectButton)
+                hintText.visibility = View.VISIBLE
+                addButton.text = "Add "
             }
+            totalText.text = "Total: "
         }
 
 //        holdButton.setOnClickListener {

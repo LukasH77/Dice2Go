@@ -102,6 +102,7 @@ class HomeFragment : Fragment() {
                 dieMenu,
                 selectMenu,
                 hintText,
+                totalText,
                 replaceD4Button,
                 replaceD6Button,
                 replaceD8Button,
@@ -121,6 +122,7 @@ class HomeFragment : Fragment() {
             addButton,
             selectButton,
             hintText,
+            totalText,
             dieMenu,
             selectMenu,
             addD4Button,
@@ -203,8 +205,6 @@ class HomeFragment : Fragment() {
 
         addButton.setOnClickListener {
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
-            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
-            Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             for (die in dice) {
                 if (!die.isVisible) {
@@ -215,6 +215,7 @@ class HomeFragment : Fragment() {
                 }
             }
             Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
+            totalText.text = "Total: "
         }
 
         clearButton.setOnClickListener {
@@ -225,7 +226,6 @@ class HomeFragment : Fragment() {
             }
             Die.setVisibility(dice as MutableList<Die>)
             Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
-            total = 0
             clSelectionPopup.visibility = View.VISIBLE
             hintText.visibility = View.VISIBLE
             totalText.text = "Total: "
