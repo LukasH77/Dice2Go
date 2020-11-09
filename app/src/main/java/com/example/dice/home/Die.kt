@@ -53,7 +53,7 @@ open class Die(
 
         fun roll(dice: MutableList<Die>): Int {
             return if (time == 1) {
-                println("roll, timer: $time")
+//                println("roll, timer: $time")
                 time--
                 time
             } else {
@@ -100,7 +100,7 @@ open class Die(
 
             addD4Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-                println(lastVisibleIndex)
+//                println(lastVisibleIndex)
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D4(addedDie.uiRepresentation)
@@ -121,7 +121,7 @@ open class Die(
 
             addD6Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-                println(lastVisibleIndex)
+//                println(lastVisibleIndex)
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D6(addedDie.uiRepresentation)
@@ -142,7 +142,7 @@ open class Die(
 
             addD8Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-                println(lastVisibleIndex)
+//                println(lastVisibleIndex)
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D8(addedDie.uiRepresentation)
@@ -163,7 +163,7 @@ open class Die(
 
             addD10Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-                println(lastVisibleIndex)
+//                println(lastVisibleIndex)
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D10(addedDie.uiRepresentation)
@@ -184,7 +184,7 @@ open class Die(
 
             addD12Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-                println(lastVisibleIndex)
+//                println(lastVisibleIndex)
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D12(addedDie.uiRepresentation)
@@ -205,7 +205,7 @@ open class Die(
 
             addD20Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-                println(lastVisibleIndex)
+//                println(lastVisibleIndex)
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D20(addedDie.uiRepresentation)
@@ -250,7 +250,7 @@ open class Die(
         }
 
         fun handleButtons(dice: MutableList<Die>, addButton: Button, selectButton: Button) {
-            println("lastVisibleIndex hb: ${findLastVisibleIndex(dice)}")
+//            println("lastVisibleIndex hb: ${findLastVisibleIndex(dice)}")
             when (findLastVisibleIndex(dice)) {
                 5 -> {
                     selectButton.isEnabled = false
@@ -297,7 +297,7 @@ open class Die(
         addButton: Button,
         selectButton: Button
     ) {
-        println("setting up die clicks")
+//        println("setting up die clicks")
         val selectedIndex = dice.indexOf(this)
         this.uiRepresentation.setOnClickListener {
             resetBackground(dice)
@@ -347,7 +347,7 @@ open class Die(
         addButton: Button,
         selectButton: Button
     ) {
-        println(selectedIndex)
+//        println(selectedIndex)
         replaceD4Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D4(this.uiRepresentation))
@@ -442,7 +442,7 @@ open class Die(
                 selectMenu.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
-                println("fault")
+//                println("fault")
                 addButton.text = "Add "
             }
             handleButtons(dice, addButton, selectButton)

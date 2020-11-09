@@ -86,9 +86,9 @@ class HomeFragment : Fragment() {
         val selectButton = binding.bSelectDie
         val addButton = binding.bAdd
         val totalText = binding.tvTotal
-        val modifierText = binding.modifier
-        val modifierUpButton = binding.modifierUp
-        val modifierDownButton = binding.modifierDown
+//        val modifierText = binding.modifier
+//        val modifierUpButton = binding.modifierUp
+//        val modifierDownButton = binding.modifierDown
         var total = 0
         var modifier = 0
 
@@ -152,17 +152,17 @@ class HomeFragment : Fragment() {
 //            }
 //        }
 
-        modifierUpButton.setOnClickListener {
-            modifier++
-            if (modifier >= 0) modifierText.text =
-                "+${modifier.toString()}" else modifierText.text = modifier.toString()
-        }
-
-        modifierDownButton.setOnClickListener {
-            modifier--
-            if (modifier >= 0) modifierText.text =
-                "+${modifier.toString()}" else modifierText.text = modifier.toString()
-        }
+//        modifierUpButton.setOnClickListener {
+//            modifier++
+//            if (modifier >= 0) modifierText.text =
+//                "+${modifier.toString()}" else modifierText.text = modifier.toString()
+//        }
+//
+//        modifierDownButton.setOnClickListener {
+//            modifier--
+//            if (modifier >= 0) modifierText.text =
+//                "+${modifier.toString()}" else modifierText.text = modifier.toString()
+//        }
 
         rollButton.setOnClickListener {
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
@@ -188,7 +188,7 @@ class HomeFragment : Fragment() {
                 timer = fixedRateTimer("timer", false, 0, 125) {
                     activity?.runOnUiThread {
                         if (Die.roll(dice as MutableList<Die>) == 0) {
-                            println("running")
+//                            println("running")
                             this.cancel()
                         }
                         for (die in dice) {

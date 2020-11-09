@@ -110,6 +110,18 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline"
                 app:srcCompat="@drawable/d6__6" />
 
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:text="Total:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"
+                app:layout_constraintEnd_toEndOf="@+id/bClear"
+                app:layout_constraintStart_toStartOf="@+id/bClear"
+                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />
+
             <Button
                 android:id="@+id/bClear"
                 android:layout_width="0dp"
@@ -124,14 +136,26 @@
 
             <Button
                 android:id="@+id/bRoll"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="120dp"
+                android:layout_height="94dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Roll"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/bAdd"
                 app:layout_constraintStart_toEndOf="@+id/bClear"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+            <Button
+                android:id="@+id/bSelectDie"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Select"
+                app:backgroundTint="#FFFF8D"
+                app:backgroundTintMode="add"
+                app:layout_constraintBottom_toTopOf="@+id/bAdd"
+                app:layout_constraintEnd_toEndOf="@+id/bAdd"
+                app:layout_constraintStart_toStartOf="@+id/bAdd"
                 app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
             <Button
@@ -168,6 +192,34 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="600dp" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <TextView
+                android:id="@+id/tvHint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="?colorPrimary"
+                android:padding="2dp"
+                android:text="@string/short_hint"
+                app:layout_constraintBottom_toBottomOf="@+id/clSelectionPopup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/clSelectionPopup"
+                app:layout_constraintTop_toTopOf="@+id/clSelectionPopup" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clSelectionPopup"
                 android:layout_width="wrap_content"
@@ -180,8 +232,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:visibility="gone">
+                app:layout_constraintVertical_bias="0.0">
 
                 <ImageButton
                     android:id="@+id/ibAddD4"
@@ -381,96 +432,44 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tvTotal"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:text="Total:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"
-                app:layout_constraintEnd_toEndOf="@+id/bClear"
-                app:layout_constraintStart_toStartOf="@+id/bClear"
-                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/modifierDown"-->
+<!--                android:layout_width="35dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:background="?colorPrimary"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/modifier"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/modifier"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/bRoll"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/modifier"-->
+<!--                app:srcCompat="@android:drawable/btn_minus" />-->
 
-            <ImageButton
-                android:id="@+id/modifierDown"
-                android:layout_width="35dp"
-                android:layout_height="0dp"
-                android:background="?colorPrimary"
-                android:scaleType="fitCenter"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/modifier"
-                app:layout_constraintEnd_toStartOf="@+id/modifier"
-                app:layout_constraintStart_toStartOf="@+id/bRoll"
-                app:layout_constraintTop_toTopOf="@+id/modifier"
-                app:srcCompat="@android:drawable/btn_minus" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/modifierUp"-->
+<!--                android:layout_width="39dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:background="?colorPrimary"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/modifier"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/bRoll"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/modifier"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/modifier"-->
+<!--                app:srcCompat="@android:drawable/btn_plus" />-->
 
-            <ImageButton
-                android:id="@+id/modifierUp"
-                android:layout_width="39dp"
-                android:layout_height="0dp"
-                android:background="?colorPrimary"
-                android:scaleType="fitCenter"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/modifier"
-                app:layout_constraintEnd_toEndOf="@+id/bRoll"
-                app:layout_constraintStart_toEndOf="@+id/modifier"
-                app:layout_constraintTop_toTopOf="@+id/modifier"
-                app:srcCompat="@android:drawable/btn_plus" />
-
-            <TextView
-                android:id="@+id/modifier"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:inputType="number"
-                android:text=" +0"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"
-                app:layout_constraintEnd_toStartOf="@+id/modifierUp"
-                app:layout_constraintStart_toEndOf="@+id/modifierDown"
-                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />
-
-            <Button
-                android:id="@+id/bSelectDie"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Select"
-                app:backgroundTint="#FFFF8D"
-                app:backgroundTintMode="add"
-                app:layout_constraintBottom_toTopOf="@+id/bAdd"
-                app:layout_constraintEnd_toEndOf="@+id/bAdd"
-                app:layout_constraintStart_toStartOf="@+id/bAdd"
-                app:layout_constraintTop_toTopOf="@+id/guideline3" />
-
-            <TextView
-                android:id="@+id/tvHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="?colorPrimary"
-                android:padding="2dp"
-                tools:visibility="gone"
-                android:text="@string/short_hint"
-                app:layout_constraintBottom_toBottomOf="@+id/clSelectionPopup"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/clSelectionPopup"
-                app:layout_constraintTop_toTopOf="@+id/clSelectionPopup" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="16dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="16dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/modifier"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:gravity="center"-->
+<!--                android:inputType="number"-->
+<!--                android:text=" +0"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/modifierUp"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/modifierDown"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
