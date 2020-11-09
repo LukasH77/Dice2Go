@@ -4,9 +4,9 @@
     <item
         android:id="@+id/settingsFragment"
         android:title="Settings" />
-    <item
-        android:id="@+id/helpFragment"
-        android:title="Help" />
+<!--    <item-->
+<!--        android:id="@+id/helpFragment"-->
+<!--        android:title="Help" />-->
     <item
         android:id="@+id/aboutFragment"
         android:title="About" />

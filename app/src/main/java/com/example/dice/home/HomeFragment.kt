@@ -94,7 +94,7 @@ class HomeFragment : Fragment() {
 
         val rollingBuzzer = activity?.getSystemService<Vibrator>()
 
-        val rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
+        var rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
 
         for (die in dice) {
             die.setupDieClicks(
@@ -173,25 +173,30 @@ class HomeFragment : Fragment() {
             Die.time = 8
 
             val vibePattern = LongArray(2)
-            vibePattern[0] = 0
+            vibePattern[0] = 10
             vibePattern[1] = 125 * 2
 
             if (dice[0].isVisible) {
                 rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
+                if (rollingSound.isPlaying) {
+                    rollingSound.reset()
+                    rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
+                }
                 rollingSound.start()
-            }
 
-            timer = fixedRateTimer("timer", false, 0, 125) {
-                activity?.runOnUiThread {
-                    if (Die.roll(dice as MutableList<Die>) == 0) {
-                        println("running")
-                        this.cancel()
+
+                timer = fixedRateTimer("timer", false, 0, 125) {
+                    activity?.runOnUiThread {
+                        if (Die.roll(dice as MutableList<Die>) == 0) {
+                            println("running")
+                            this.cancel()
+                        }
+                        for (die in dice) {
+                            if (!die.isVisible) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
+                        }
+                        total += modifier
+                        totalText.text = "Total: $total"
                     }
-                    for (die in dice) {
-                        if (!die.isVisible) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
-                    }
-                    total += modifier
-                    totalText.text = "Total: $total"
                     total = 0
                 }
             }
