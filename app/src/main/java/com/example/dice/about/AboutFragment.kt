@@ -32,7 +32,7 @@ class AboutFragment : Fragment() {
             } catch (e: Exception) {
                 Toast.makeText(
                     this.activity,
-                    "There are no email clients installed",
+                    "There are no email clients installed.",
                     Toast.LENGTH_LONG
                 ).show()
             }

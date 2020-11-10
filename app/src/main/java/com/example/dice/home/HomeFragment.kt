@@ -78,7 +78,6 @@ class HomeFragment : Fragment() {
 //        val settings = viewModel.settings
 
 
-
 //        val settings = Settings(1, true, false)
 //        dao.insert(settings)
 
@@ -199,7 +198,7 @@ class HomeFragment : Fragment() {
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             val settings = viewModel.settings
-            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
+//            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
 
             // avoids infinite roll when spamming the button
             if (::timer.isInitialized) timer.cancel()
@@ -212,8 +211,10 @@ class HomeFragment : Fragment() {
             vibePattern[1] = 125 * 2
 
             if (dice[0].isVisible) {
-                if (settings.vibration) {
-                    rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    if (settings.vibration) {
+                        rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
+                    }
                 }
                 if (settings.sound) {
                     if (rollingSound.isPlaying) {
@@ -229,13 +230,21 @@ class HomeFragment : Fragment() {
 //                            println("running")
                             this.cancel()
                         }
+                        total = 0
                         for (die in dice) {
                             if (!die.isVisible) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
                         }
-                        total += modifier
+//                        total += modifier
                         totalText.text = "Total: $total"
                     }
-                    total = 0
+                }
+
+                //in reality this happens before the timer because the timer runs as a coroutine in the background
+                // could just put it before the timer in the code, but I'll leave it as an example. I hve to get this eventually^^
+                for (die in dice) {
+                    println("before ${dice.indexOf(die)}: ${die.recentSides}")
+                    die.recentSides = mutableListOf(die.recentSides.last())
+                    println("after ${dice.indexOf(die)}: ${die.recentSides}")
                 }
             }
         }

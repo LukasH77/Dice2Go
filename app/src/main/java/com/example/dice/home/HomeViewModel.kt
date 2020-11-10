@@ -1,5 +1,6 @@
 package com.example.dice.home
 
+import android.os.Build
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
@@ -35,18 +36,20 @@ class HomeViewModel(
 
     init {
         settings = getDBSettings()
-//        scope.launch {
-//            withContext(Dispatchers.IO) {
-//                try {
-//                    dataSource.insert(Settings(0, true, true, true, false))
-//                    println("insert")
-//                } catch (e: Exception) {
-//                    dataSource.update(Settings(0, true, true, true, false))
-//                    println("update")
-//                }
-//            }
-//        }
-
+        scope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        dataSource.insert(Settings(0, true, true, true, false))
+                    } else {
+                        dataSource.insert(Settings(0, true, true, false, false))
+                    }
+                    println("insert")
+                } catch (e: Exception) {
+                    println(e.message)
+                }
+            }
+        }
     }
 
     fun x() {

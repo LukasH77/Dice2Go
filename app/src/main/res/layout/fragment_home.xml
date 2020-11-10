@@ -8,11 +8,11 @@
     </data>
 
 
-    <ScrollView
-        android:id="@+id/svMain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+<!--    <ScrollView-->
+<!--        android:id="@+id/svMain"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:fillViewport="true">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clMain"
@@ -20,11 +20,12 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
+
             <ImageView
                 android:id="@+id/ivDie1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -41,7 +42,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
                 app:layout_constraintDimensionRatio="h,1:1"
@@ -72,13 +74,15 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@id/guideline5"
                 app:layout_constraintStart_toEndOf="@+id/ivDie3"
                 app:layout_constraintTop_toTopOf="@+id/guideline2"
-                app:srcCompat="@drawable/d6__6"
+                app:srcCompat="@drawable/d10__10"
                 tools:visibility="visible" />
 
             <ImageView
@@ -86,7 +90,6 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintDimensionRatio="h,1:1"
@@ -101,7 +104,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintDimensionRatio="h,1:1"
@@ -109,7 +113,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/ivDie5"
                 app:layout_constraintTop_toTopOf="@+id/guideline"
-                app:srcCompat="@drawable/d6__6" />
+                app:srcCompat="@drawable/d20__20" />
 
             <TextView
                 android:id="@+id/tvTotal"
@@ -138,11 +142,9 @@
             <Button
                 android:id="@+id/bRoll"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:paddingTop="40dp"
-                android:paddingBottom="40dp"
                 android:text="Roll"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/bAdd"
@@ -181,35 +183,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="400dp" />
+                app:layout_constraintGuide_percent=".56" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="200dp" />
+                app:layout_constraintGuide_percent="0.28" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="600dp" />
+                app:layout_constraintGuide_percent="0.84" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="16dp" />
+                app:layout_constraintGuide_percent="0.05" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="16dp" />
+                app:layout_constraintGuide_percent="0.95" />
 
             <TextView
                 android:id="@+id/tvHint"
@@ -223,16 +225,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/clSelectionPopup"
-                app:layout_constraintTop_toTopOf="@+id/clSelectionPopup" />
+                app:layout_constraintTop_toTopOf="@+id/clSelectionPopup"
+                tools:visibility="invisible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clSelectionPopup"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="?colorPrimary"
                 android:orientation="horizontal"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintBottom_toTopOf="@+id/ivDie5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -242,7 +245,7 @@
                 <ImageButton
                     android:id="@+id/ibAddD4"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="16dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
@@ -255,67 +258,73 @@
                 <ImageButton
                     android:id="@+id/ibAddD6"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibAddD8"
                     app:layout_constraintEnd_toEndOf="@+id/ibAddD8"
                     app:layout_constraintStart_toStartOf="@+id/ibAddD10"
+                    app:layout_constraintTop_toBottomOf="@+id/ibAddD4"
                     app:srcCompat="@drawable/choose_d6" />
 
                 <ImageButton
                     android:id="@+id/ibAddD8"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibAddD10"
                     app:layout_constraintEnd_toEndOf="@+id/ibAddD10"
                     app:layout_constraintStart_toStartOf="@+id/ibAddD10"
+                    app:layout_constraintTop_toBottomOf="@+id/ibAddD6"
                     app:srcCompat="@drawable/choose_d8" />
 
                 <ImageButton
                     android:id="@+id/ibAddD10"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibAddD12"
                     app:layout_constraintEnd_toEndOf="@+id/ibAddD12"
                     app:layout_constraintStart_toStartOf="@+id/ibAddD12"
+                    app:layout_constraintTop_toBottomOf="@+id/ibAddD8"
                     app:srcCompat="@drawable/choose_d10" />
 
                 <ImageButton
                     android:id="@+id/ibAddD12"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibAddD20"
                     app:layout_constraintEnd_toEndOf="@+id/ibAddD20"
                     app:layout_constraintStart_toStartOf="@+id/ibAddD20"
+                    app:layout_constraintTop_toBottomOf="@+id/ibAddD10"
                     app:srcCompat="@drawable/choose_d12" />
 
                 <ImageButton
                     android:id="@+id/ibAddD20"
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibExitSelect"
                     app:layout_constraintEnd_toEndOf="@+id/ibExitSelect"
                     app:layout_constraintStart_toStartOf="@+id/ibExitSelect"
+                    app:layout_constraintTop_toBottomOf="@+id/ibAddD12"
                     app:srcCompat="@drawable/choose_d20" />
 
                 <ImageButton
                     android:id="@+id/ibExitSelect"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginBottom="16dp"
                     android:background="?colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ibAddD20"
                     app:srcCompat="@android:drawable/ic_delete" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -323,11 +332,11 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clPopup"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="?colorPrimary"
                 android:orientation="horizontal"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintBottom_toTopOf="@+id/ivDie5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -337,8 +346,7 @@
                 <ImageButton
                     android:id="@+id/ibReplaceD4"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibReplaceD6"
@@ -350,56 +358,61 @@
                 <ImageButton
                     android:id="@+id/ibReplaceD6"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibReplaceD8"
                     app:layout_constraintEnd_toEndOf="@+id/ibReplaceD8"
                     app:layout_constraintStart_toStartOf="@+id/ibReplaceD8"
+                    app:layout_constraintTop_toBottomOf="@+id/ibReplaceD4"
                     app:srcCompat="@drawable/choose_d6" />
 
                 <ImageButton
                     android:id="@+id/ibReplaceD8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibReplaceD10"
                     app:layout_constraintEnd_toEndOf="@+id/ibReplaceD10"
                     app:layout_constraintStart_toStartOf="@+id/ibReplaceD10"
+                    app:layout_constraintTop_toBottomOf="@+id/ibReplaceD6"
                     app:srcCompat="@drawable/choose_d8" />
 
                 <ImageButton
                     android:id="@+id/ibReplaceD10"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibReplaceD12"
                     app:layout_constraintEnd_toEndOf="@+id/ibReplaceD12"
                     app:layout_constraintStart_toStartOf="@+id/ibReplaceD12"
+                    app:layout_constraintTop_toBottomOf="@+id/ibReplaceD8"
                     app:srcCompat="@drawable/choose_d10" />
 
                 <ImageButton
                     android:id="@+id/ibReplaceD12"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibReplaceD20"
                     app:layout_constraintEnd_toEndOf="@+id/ibReplaceD20"
                     app:layout_constraintStart_toStartOf="@+id/ibReplaceD20"
+                    app:layout_constraintTop_toBottomOf="@+id/ibReplaceD10"
                     app:srcCompat="@drawable/choose_d12" />
 
                 <ImageButton
                     android:id="@+id/ibReplaceD20"
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toTopOf="@+id/ibRemove"
                     app:layout_constraintEnd_toEndOf="@+id/ibRemove"
                     app:layout_constraintStart_toStartOf="@+id/ibRemove"
+                    app:layout_constraintTop_toBottomOf="@+id/ibReplaceD12"
                     app:srcCompat="@drawable/choose_d20" />
 
                 <!--                <ImageButton-->
@@ -416,23 +429,23 @@
                 <ImageButton
                     android:id="@+id/ibRemove"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     app:layout_constraintBottom_toTopOf="@+id/ibExit"
                     app:layout_constraintEnd_toEndOf="@+id/ibExit"
                     app:layout_constraintStart_toStartOf="@+id/ibExit"
+                    app:layout_constraintTop_toBottomOf="@+id/ibReplaceD20"
                     app:srcCompat="@android:drawable/ic_menu_delete" />
 
                 <ImageButton
                     android:id="@+id/ibExit"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_height="0dp"
                     android:background="?colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ibRemove"
                     app:srcCompat="@android:drawable/ic_delete" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -477,5 +490,5 @@
             <!--                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+<!--    </ScrollView>-->
 </layout>

@@ -1,11 +1,13 @@
 package com.example.dice.settings
 
+import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -59,7 +61,14 @@ class SettingsFragment : Fragment() {
         }
 
         vibrationSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) viewModel.updateVibrationSettings(true) else viewModel.updateVibrationSettings(false)
+            if (isChecked) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    viewModel.updateVibrationSettings(true)
+                } else {
+                    Toast.makeText(activity, "This feature is not supported by your Android version.", Toast.LENGTH_LONG).show()
+                    vibrationSwitch.isChecked = false
+                }
+            } else viewModel.updateVibrationSettings(false)
         }
 
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->

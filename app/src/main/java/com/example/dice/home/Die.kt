@@ -58,21 +58,24 @@ open class Die(
                 time
             } else {
                 for (die in dice) {
-                    if (!die.isActive) continue
-                    var current = die.sides[(0 until die.sidesAmount).random()]
+                    if (!die.isVisible) continue
+                    var current = (0 until die.sidesAmount).random()
                     val currentList = die.recentSides
+                    println("current ${dice.indexOf(die)}: $currentList")
                     when (currentList.size) {
-                        1 -> while (current == currentList.last()) {
-                            current = die.sides[(0 until die.sidesAmount).random()]
+                        1 -> {println("small")
+                            while (current == die.sides.indexOf(currentList.last())) {
+
+                            current = (0 until die.sidesAmount).random()}
                         }
-                        else -> while (current == currentList.last()
-                            || current == currentList[currentList.lastIndex - 1]
+                        else -> while (current == die.sides.indexOf(currentList.last())
+                            || current == die.sides.indexOf(currentList[currentList.lastIndex - 1])
                         ) {
-                            current = die.sides[(0 until die.sidesAmount).random()]
+                            current = (0 until die.sidesAmount).random()
                         }
                     }
-                    currentList.add(current)
-                    die.uiRepresentation.setImageResource(current)
+                    currentList.add(die.sides[current])
+                    die.uiRepresentation.setImageResource(die.sides[current])
                 }
                 time--
                 time
