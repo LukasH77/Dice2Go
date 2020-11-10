@@ -26,9 +26,9 @@
                 android:padding="20dp"
                 android:text="Animation"
                 app:layout_constraintBottom_toTopOf="@+id/sSound"
-                app:layout_constraintEnd_toEndOf="@+id/sDarkMode"
+                app:layout_constraintEnd_toEndOf="@+id/sVibration"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/sDarkMode"
+                app:layout_constraintStart_toStartOf="@+id/sVibration"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="spread" />
 
@@ -54,7 +54,7 @@
                 android:background="?colorPrimary"
                 android:padding="20dp"
                 android:text="Vibration"
-                app:layout_constraintBottom_toTopOf="@+id/sDarkMode"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sSound" />
@@ -67,6 +67,7 @@
                 android:background="?colorPrimary"
                 android:padding="20dp"
                 android:text="Dark Mode"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
