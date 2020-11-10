@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.dice.settings.SettingsViewModel" />
     </data>
 
     <ScrollView
@@ -23,7 +25,7 @@
                 android:background="?colorPrimary"
                 android:padding="20dp"
                 android:text="Animation"
-                app:layout_constraintBottom_toTopOf="@+id/switch1"
+                app:layout_constraintBottom_toTopOf="@+id/sSound"
                 app:layout_constraintEnd_toEndOf="@+id/sDarkMode"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/sDarkMode"
@@ -31,9 +33,37 @@
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sSound"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:background="?colorPrimary"
+                android:padding="20dp"
+                android:text="Sound"
+                app:layout_constraintBottom_toTopOf="@+id/sVibration"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sAnimation" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sVibration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:background="?colorPrimary"
+                android:padding="20dp"
+                android:text="Vibration"
+                app:layout_constraintBottom_toTopOf="@+id/sDarkMode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sSound" />
+
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sDarkMode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+
                 android:background="?colorPrimary"
                 android:padding="20dp"
                 android:text="Dark Mode"
@@ -41,32 +71,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switch2" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="?colorPrimary"
-                android:padding="20dp"
-                android:text="Vibration"
-                app:layout_constraintBottom_toTopOf="@+id/switch2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sAnimation" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="?colorPrimary"
-                android:padding="20dp"
-                android:text="Sound"
-                app:layout_constraintBottom_toTopOf="@+id/sDarkMode"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switch1" />
+                app:layout_constraintTop_toBottomOf="@+id/sVibration" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

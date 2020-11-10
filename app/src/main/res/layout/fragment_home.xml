@@ -11,7 +11,8 @@
     <ScrollView
         android:id="@+id/svMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clMain"
@@ -125,7 +126,7 @@
             <Button
                 android:id="@+id/bClear"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:text="Clear"
                 app:backgroundTintMode="add"
@@ -136,10 +137,12 @@
 
             <Button
                 android:id="@+id/bRoll"
-                android:layout_width="120dp"
-                android:layout_height="94dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:paddingTop="40dp"
+                android:paddingBottom="40dp"
                 android:text="Roll"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/bAdd"
@@ -149,19 +152,20 @@
             <Button
                 android:id="@+id/bSelectDie"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:text="Select"
                 app:backgroundTint="#FFFF8D"
                 app:backgroundTintMode="add"
                 app:layout_constraintBottom_toTopOf="@+id/bAdd"
                 app:layout_constraintEnd_toEndOf="@+id/bAdd"
                 app:layout_constraintStart_toStartOf="@+id/bAdd"
-                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+                app:layout_constraintTop_toTopOf="@+id/bRoll"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/bAdd"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
                 android:enabled="true"
                 android:text="Add"
@@ -169,7 +173,8 @@
                 app:backgroundTintMode="add"
                 app:layout_constraintBottom_toBottomOf="@+id/bRoll"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/bRoll" />
+                app:layout_constraintStart_toEndOf="@+id/bRoll"
+                app:layout_constraintTop_toBottomOf="@+id/bSelectDie" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -432,44 +437,44 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/modifierDown"-->
-<!--                android:layout_width="35dp"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:background="?colorPrimary"-->
-<!--                android:scaleType="fitCenter"-->
-<!--                android:visibility="gone"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/modifier"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/modifier"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/bRoll"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/modifier"-->
-<!--                app:srcCompat="@android:drawable/btn_minus" />-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/modifierDown"-->
+            <!--                android:layout_width="35dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:background="?colorPrimary"-->
+            <!--                android:scaleType="fitCenter"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/modifier"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/modifier"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/bRoll"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/modifier"-->
+            <!--                app:srcCompat="@android:drawable/btn_minus" />-->
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/modifierUp"-->
-<!--                android:layout_width="39dp"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:background="?colorPrimary"-->
-<!--                android:scaleType="fitCenter"-->
-<!--                android:visibility="gone"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/modifier"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/bRoll"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/modifier"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/modifier"-->
-<!--                app:srcCompat="@android:drawable/btn_plus" />-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/modifierUp"-->
+            <!--                android:layout_width="39dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:background="?colorPrimary"-->
+            <!--                android:scaleType="fitCenter"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/modifier"-->
+            <!--                app:layout_constraintEnd_toEndOf="@+id/bRoll"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/modifier"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/modifier"-->
+            <!--                app:srcCompat="@android:drawable/btn_plus" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/modifier"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:gravity="center"-->
-<!--                android:inputType="number"-->
-<!--                android:text=" +0"-->
-<!--                android:visibility="gone"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/modifierUp"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/modifierDown"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/modifier"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:gravity="center"-->
+            <!--                android:inputType="number"-->
+            <!--                android:text=" +0"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/bSelectDie"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/modifierUp"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/modifierDown"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/bSelectDie" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

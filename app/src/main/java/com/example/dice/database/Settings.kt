@@ -8,8 +8,16 @@ import androidx.room.PrimaryKey
 data class Settings(
     @PrimaryKey
     val id: Int,
+
     @ColumnInfo
     val animation: Boolean,
+
     @ColumnInfo
-    val nightMode: Boolean
+    val sound: Boolean,
+
+    @ColumnInfo
+    val vibration: Boolean,
+
+    @ColumnInfo
+    val darkMode: Boolean
 )

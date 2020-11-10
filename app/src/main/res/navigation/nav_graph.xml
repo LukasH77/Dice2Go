@@ -16,23 +16,27 @@
         <action
             android:id="@+id/action_homeFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.dice.settings.SettingsFragment"
         android:label="Settings"
-        tools:layout="@layout/fragment_settings"/>
+        tools:layout="@layout/fragment_settings">
+
+        <argument android:name="animation"
+            app:argType="boolean" />
+        <argument
+            android:name="sound"
+            app:argType="boolean" />
+        <argument
+            android:name="vibration"
+            app:argType="boolean" />
+        <argument android:name="darkMode"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.dice.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
-    <fragment
-        android:id="@+id/helpFragment"
-        android:name="com.example.dice.help.HelpFragment"
-        android:label="Help"
-        tools:layout="@layout/fragment_help" />
 </navigation>

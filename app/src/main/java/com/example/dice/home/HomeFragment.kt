@@ -7,6 +7,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.text.Layout
+import android.text.Layout.Directions
 import android.view.*
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -15,9 +17,13 @@ import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import com.example.dice.R
+import com.example.dice.database.SettingsDatabase
 import com.example.dice.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
@@ -27,6 +33,8 @@ import kotlin.concurrent.fixedRateTimer
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private lateinit var viewModelFactory: HomeViewModelFactory
     private lateinit var viewModel: HomeViewModel
 
     private lateinit var timer: Timer
@@ -43,11 +51,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        val database = SettingsDatabase.createInstance(this.requireActivity().application)
+        val dao = database.settingsDao
 
-//        val database = SettingsDatabase.createInstance(this.requireActivity().application)
-//        val dao = database.settingsDao
+        viewModelFactory = HomeViewModelFactory(dao)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
+
 //        val settings = Settings(1, true, false)
 //        dao.insert(settings)
 
@@ -167,7 +178,7 @@ class HomeFragment : Fragment() {
         rollButton.setOnClickListener {
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
-
+            viewModel.x()
             // avoids infinite roll when spamming the button
             if (::timer.isInitialized) timer.cancel()
             Die.time = 8
@@ -224,6 +235,9 @@ class HomeFragment : Fragment() {
         }
 
         clearButton.setOnClickListener {
+            val settings = viewModel.settings
+            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
+
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             for (i in dice.indices) {
@@ -243,6 +257,7 @@ class HomeFragment : Fragment() {
         }
 
         setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -254,6 +269,14 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
         Die.resetBackground(dice as MutableList<Die>)
+        val settings = viewModel.settings
+
+        if (item.itemId == R.id.settingsFragment) {
+            println("nav")
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment(settings.animation, settings.sound, settings.vibration, settings.darkMode))
+            return true
+        }
+
         return NavigationUI.onNavDestinationSelected(
             item,
             findNavController()

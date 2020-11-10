@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Settings::class], version = 1)
+@Database(entities = [Settings::class], version = 2)
 abstract class SettingsDatabase : RoomDatabase() {
 
     abstract val settingsDao: SettingsDao
@@ -16,12 +16,14 @@ abstract class SettingsDatabase : RoomDatabase() {
 
         fun createInstance(context: Context): SettingsDatabase {
             synchronized(this) {
-                if(!::INSTANCE.isInitialized) {
+                if (!::INSTANCE.isInitialized) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         SettingsDatabase::class.java,
                         "Settings",
-                    ).build()
+                    )
+//                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             return INSTANCE
