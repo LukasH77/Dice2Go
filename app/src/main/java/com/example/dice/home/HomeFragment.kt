@@ -52,10 +52,20 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
+
         val database = SettingsDatabase.createInstance(this.requireActivity().application)
         val dao = database.settingsDao
 
-        viewModelFactory = HomeViewModelFactory(dao)
+        viewModelFactory = HomeViewModelFactory(
+            dao,
+            binding.ivDie1,
+            binding.ivDie2,
+            binding.ivDie3,
+            binding.ivDie4,
+            binding.ivDie5,
+            binding.ivDie6
+        )
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
         try {
@@ -67,7 +77,7 @@ class HomeFragment : Fragment() {
 
 //        val settings = viewModel.settings
 
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
+
 
 //        val settings = Settings(1, true, false)
 //        dao.insert(settings)
