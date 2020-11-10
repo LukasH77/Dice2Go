@@ -12,6 +12,7 @@ import android.text.Layout.Directions
 import android.view.*
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
@@ -56,6 +57,15 @@ class HomeFragment : Fragment() {
 
         viewModelFactory = HomeViewModelFactory(dao)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+
+        try {
+            viewModel.settings = viewModel.getDBSettings()
+            println("vm settings updated")
+        } catch (e: Exception) {
+            println("updating vm settings failed")
+        }
+
+//        val settings = viewModel.settings
 
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
 
@@ -178,23 +188,30 @@ class HomeFragment : Fragment() {
         rollButton.setOnClickListener {
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
-            viewModel.x()
+            val settings = viewModel.settings
+            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
+
             // avoids infinite roll when spamming the button
             if (::timer.isInitialized) timer.cancel()
-            Die.time = 8
+
+            if (settings.animation) Die.time = 8 else Die.time = 2
+
 
             val vibePattern = LongArray(2)
             vibePattern[0] = 10
             vibePattern[1] = 125 * 2
 
             if (dice[0].isVisible) {
-                rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
-                if (rollingSound.isPlaying) {
-                    rollingSound.reset()
-                    rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
+                if (settings.vibration) {
+                    rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
                 }
-                rollingSound.start()
-
+                if (settings.sound) {
+                    if (rollingSound.isPlaying) {
+                        rollingSound.reset()
+                        rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
+                    }
+                    rollingSound.start()
+                }
 
                 timer = fixedRateTimer("timer", false, 0, 125) {
                     activity?.runOnUiThread {
@@ -237,7 +254,6 @@ class HomeFragment : Fragment() {
         clearButton.setOnClickListener {
             val settings = viewModel.settings
             println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
-
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             for (i in dice.indices) {
@@ -273,7 +289,14 @@ class HomeFragment : Fragment() {
 
         if (item.itemId == R.id.settingsFragment) {
             println("nav")
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment(settings.animation, settings.sound, settings.vibration, settings.darkMode))
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToSettingsFragment(
+                    settings.animation,
+                    settings.sound,
+                    settings.vibration,
+                    settings.darkMode
+                )
+            )
             return true
         }
 

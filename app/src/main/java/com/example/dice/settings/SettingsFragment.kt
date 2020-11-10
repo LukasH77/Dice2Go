@@ -50,6 +50,18 @@ class SettingsFragment : Fragment() {
         vibrationSwitch.isChecked = settings.vibration
         themeSwitch.isChecked = settings.darkMode
 
+        animationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) viewModel.updateAnimationSettings(true) else viewModel.updateAnimationSettings(false)
+        }
+
+        soundSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) viewModel.updateSoundSettings(true) else viewModel.updateSoundSettings(false)
+        }
+
+        vibrationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) viewModel.updateVibrationSettings(true) else viewModel.updateVibrationSettings(false)
+        }
+
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 viewModel.updateThemeSettings(true)

@@ -1,5 +1,6 @@
 package com.example.dice.home
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.dice.database.Settings
@@ -27,6 +28,7 @@ class HomeViewModel(private val dataSource: SettingsDao) : ViewModel() {
 //                }
 //            }
 //        }
+
     }
 
     fun x() {
@@ -35,7 +37,7 @@ class HomeViewModel(private val dataSource: SettingsDao) : ViewModel() {
     }
 
     fun getDBSettings(): Settings {
-        scope.launch {
+        scope.async {
             withContext(Dispatchers.IO) {
                 settings =  dataSource.getSettings()
             }
