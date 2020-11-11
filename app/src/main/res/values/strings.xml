@@ -1,13 +1,9 @@
 <resources>
     <string name="app_name">Die Rolling</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="short_hint">This is the select menu, it opens when
-        \nno dice are on screen or when you tap
-        \nthe \"SELECT\" button.
-        \nSelect a type of die from the menu to add it.
+    <string name="short_hint">This is the select menu, it opens when no dice are on screen or when you tap the \"SELECT\" button. Select a type of die from the menu to add it.
         \n
-        \nTap the \"ADD\" button to add more of your
-        \nselected type.
+        \nTap the \"ADD\" button to add more of you selected type.
         \n
         \nTap a die to replace or remove it.
         \n
