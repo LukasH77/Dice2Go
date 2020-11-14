@@ -1,13 +1,9 @@
 package com.example.dice.home
 
-import android.content.Context
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginRight
 import com.example.dice.R
-import kotlinx.android.synthetic.main.fragment_home.*
 
 open class Die(
     var sidesAmount: Int,
@@ -23,27 +19,9 @@ open class Die(
         var time = 0
 
         fun setVisibility(dice: MutableList<Die>) {
-            val lastVisibleIndex = findLastVisibleIndex(dice)
-
             for (die in dice) {
-//                val param = die.uiRepresentation.layoutParams as ViewGroup.MarginLayoutParams
-
                 if (die.isVisible) {
                     die.uiRepresentation.visibility = View.VISIBLE
-
-//                    if (dice.indexOf(die) % 2 == 0 && dice.indexOf(die) == lastVisibleIndex) {
-//                        param.setMargins(0, 0, 0, 0)
-//                        die.uiRepresentation.layoutParams = param
-//                    } else {
-//                        if (dice.indexOf(die) % 2 == 0) {
-//                            param.rightMargin = 8
-//                            die.uiRepresentation.layoutParams = param
-//                        } else {
-//                            param.leftMargin = 8
-//                            die.uiRepresentation.layoutParams = param
-//                        }
-//                    }
-
                 } else {
                     die.uiRepresentation.visibility = View.GONE
                     die.uiRepresentation.setImageResource(die.initialSide)
@@ -53,7 +31,6 @@ open class Die(
 
         fun roll(dice: MutableList<Die>): Int {
             return if (time == 1) {
-//                println("roll, timer: $time")
                 time--
                 time
             } else {
@@ -99,11 +76,11 @@ open class Die(
             exitSelectButton: ImageButton
         ) {
             handleButtons(dice, addButton, selectButton)
-            var lastVisibleIndex = 0
+            var lastVisibleIndex: Int
 
             addD4Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-//                println(lastVisibleIndex)
+
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D4(addedDie.uiRepresentation)
@@ -114,6 +91,7 @@ open class Die(
                     addedDie.recentSides = modelDie.recentSides
                     addedDie.isActive = modelDie.isActive
                 }
+
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
@@ -124,7 +102,7 @@ open class Die(
 
             addD6Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-//                println(lastVisibleIndex)
+
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D6(addedDie.uiRepresentation)
@@ -135,6 +113,7 @@ open class Die(
                     addedDie.recentSides = modelDie.recentSides
                     addedDie.isActive = modelDie.isActive
                 }
+
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
@@ -145,7 +124,7 @@ open class Die(
 
             addD8Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-//                println(lastVisibleIndex)
+
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D8(addedDie.uiRepresentation)
@@ -156,6 +135,7 @@ open class Die(
                     addedDie.recentSides = modelDie.recentSides
                     addedDie.isActive = modelDie.isActive
                 }
+
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
@@ -166,7 +146,7 @@ open class Die(
 
             addD10Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-//                println(lastVisibleIndex)
+
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D10(addedDie.uiRepresentation)
@@ -177,6 +157,7 @@ open class Die(
                     addedDie.recentSides = modelDie.recentSides
                     addedDie.isActive = modelDie.isActive
                 }
+
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
@@ -187,7 +168,7 @@ open class Die(
 
             addD12Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-//                println(lastVisibleIndex)
+
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D12(addedDie.uiRepresentation)
@@ -198,6 +179,7 @@ open class Die(
                     addedDie.recentSides = modelDie.recentSides
                     addedDie.isActive = modelDie.isActive
                 }
+
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
@@ -208,7 +190,7 @@ open class Die(
 
             addD20Button.setOnClickListener {
                 lastVisibleIndex = findLastVisibleIndex(dice)
-//                println(lastVisibleIndex)
+
                 for (i in lastVisibleIndex until dice.lastIndex) {
                     val addedDie = dice[i + 1]
                     val modelDie = D20(addedDie.uiRepresentation)
@@ -219,6 +201,7 @@ open class Die(
                     addedDie.recentSides = modelDie.recentSides
                     addedDie.isActive = modelDie.isActive
                 }
+
                 dice[lastVisibleIndex + 1].isVisible = true
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
@@ -230,7 +213,6 @@ open class Die(
             exitSelectButton.setOnClickListener {
                 selectMenu.visibility = View.GONE
                 hintText.visibility = View.GONE
-//                removeMenus(dice, dieMenu, selectMenu, hintText)
             }
         }
 
@@ -253,7 +235,6 @@ open class Die(
         }
 
         fun handleButtons(dice: MutableList<Die>, addButton: Button, selectButton: Button) {
-//            println("lastVisibleIndex hb: ${findLastVisibleIndex(dice)}")
             when (findLastVisibleIndex(dice)) {
                 5 -> {
                     selectButton.isEnabled = false
@@ -300,15 +281,11 @@ open class Die(
         addButton: Button,
         selectButton: Button
     ) {
-//        println("setting up die clicks")
         val selectedIndex = dice.indexOf(this)
         this.uiRepresentation.setOnClickListener {
             resetBackground(dice)
             this.uiRepresentation.setBackgroundResource(R.color.primaryColor)
             dieMenu.visibility = View.VISIBLE
-//            if (this.isActive) holdButton.setImageResource(android.R.drawable.ic_media_pause) else holdButton.setImageResource(
-//                android.R.drawable.ic_media_play
-//            )
             addOrRemove(
                 selectedIndex,
                 dice,
@@ -350,7 +327,6 @@ open class Die(
         addButton: Button,
         selectButton: Button
     ) {
-//        println(selectedIndex)
         replaceD4Button.setOnClickListener {
             dice.removeAt(selectedIndex)
             dice.add(selectedIndex, D4(this.uiRepresentation))
@@ -445,7 +421,6 @@ open class Die(
                 selectMenu.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
-//                println("fault")
                 addButton.text = "Add "
             }
             handleButtons(dice, addButton, selectButton)
