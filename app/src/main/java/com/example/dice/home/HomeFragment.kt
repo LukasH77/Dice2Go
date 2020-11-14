@@ -2,31 +2,20 @@ package com.example.dice.home
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.AudioManager
 import android.media.MediaPlayer
-import android.media.SoundPool
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.text.Layout
-import android.text.Layout.Directions
 import android.view.*
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
 import com.example.dice.R
-//import com.example.dice.database.SettingsDatabase
 import com.example.dice.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
@@ -37,9 +26,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-//    private lateinit var viewModelFactory: HomeViewModelFactory
-//    private lateinit var viewModel: HomeViewModel
-
     private lateinit var timer: Timer
 
     private lateinit var dice: List<Die>
@@ -48,12 +34,17 @@ class HomeFragment : Fragment() {
     private lateinit var selectMenu: ConstraintLayout
     private lateinit var hintText: TextView
 
-    //    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("NewApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+//        val holdButton = binding.ibHold
+//        val modifierText = binding.modifier
+//        val modifierUpButton = binding.modifierUp
+//        val modifierDownButton = binding.modifierDown
+//        var modifier = 0
 
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
 
@@ -69,33 +60,6 @@ class HomeFragment : Fragment() {
         val isSoundOn = preferences?.getBoolean(soundPreferenceKey, true)
         val isVibrationOn =
             preferences?.getBoolean(vibrationPreferenceKey, Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-
-//        val database = SettingsDatabase.createInstance(this.requireActivity().application)
-//        val dao = database.settingsDao
-//
-//        viewModelFactory = HomeViewModelFactory(
-//            dao,
-//            binding.ivDie1,
-//            binding.ivDie2,
-//            binding.ivDie3,
-//            binding.ivDie4,
-//            binding.ivDie5,
-//            binding.ivDie6
-//        )
-//        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
-//
-//        try {
-//            viewModel.settings = viewModel.getDBSettings()
-//            println("vm settings updated")
-//        } catch (e: Exception) {
-//            println("updating vm settings failed")
-//        }
-
-//        val settings = viewModel.settings
-
-
-//        val settings = Settings(1, true, false)
-//        dao.insert(settings)
 
         dice = mutableListOf(
             D6(binding.ivDie1),
@@ -116,7 +80,7 @@ class HomeFragment : Fragment() {
         val replaceD12Button = binding.ibReplaceD12
         val replaceD20Button = binding.ibReplaceD20
         val removeButton = binding.ibRemove
-//        val holdButton = binding.ibHold
+
         val exitButton = binding.ibExit
 
         val addD4Button = binding.ibAddD4
@@ -132,11 +96,8 @@ class HomeFragment : Fragment() {
         val selectButton = binding.bSelectDie
         val addButton = binding.bAdd
         val totalText = binding.tvTotal
-//        val modifierText = binding.modifier
-//        val modifierUpButton = binding.modifierUp
-//        val modifierDownButton = binding.modifierDown
+
         var total = 0
-        var modifier = 0
 
         val rollingBuzzer = activity?.getSystemService<Vibrator>()
 
@@ -182,22 +143,6 @@ class HomeFragment : Fragment() {
 
         Die.setVisibility(dice as MutableList<Die>)
 
-//        //simulate first rolls to avoid lag
-//        //if database is empty or something, when dies are persistent this shouldn't happen
-//        println("simulating die rolls")
-//        repeat(2) {
-//            if (::timer.isInitialized) timer.cancel()
-//            Die.time = 3
-//            timer = fixedRateTimer("timer", false, 0L, 100) {
-//                activity?.runOnUiThread {
-//                    if (Die.roll(dice as MutableList<Die>) == 0) {
-//                        println("running")
-//                        this.cancel()
-//                    }
-//                }
-//            }
-//        }
-
 //        modifierUpButton.setOnClickListener {
 //            modifier++
 //            if (modifier >= 0) modifierText.text =
@@ -213,14 +158,11 @@ class HomeFragment : Fragment() {
         rollButton.setOnClickListener {
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
-//            val settings = viewModel.settings
-//            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
 
             // avoids infinite roll when spamming the button
             if (::timer.isInitialized) timer.cancel()
 
             if (isAnimationOn!!) Die.time = 8 else Die.time = 2
-
 
             val vibePattern = LongArray(2)
             vibePattern[0] = 10
@@ -241,7 +183,6 @@ class HomeFragment : Fragment() {
                 timer = fixedRateTimer("timer", false, 0, 125) {
                     activity?.runOnUiThread {
                         if (Die.roll(dice as MutableList<Die>) == 0) {
-//                            println("running")
                             this.cancel()
                         }
                         total = 0
@@ -254,7 +195,7 @@ class HomeFragment : Fragment() {
                 }
 
                 //in reality this happens before the timer because the timer runs as a coroutine in the background
-                // could just put it before the timer in the code, but I'll leave it as an example. I hve to get this eventually^^
+                // could just put it before the timer in the code, but I'll leave it as an example.
                 for (die in dice) {
                     println("before ${dice.indexOf(die)}: ${die.recentSides}")
                     die.recentSides = mutableListOf(die.recentSides.last())
@@ -285,8 +226,6 @@ class HomeFragment : Fragment() {
         }
 
         clearButton.setOnClickListener {
-//            val settings = viewModel.settings
-//            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             for (i in dice.indices) {
@@ -318,20 +257,6 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
         Die.resetBackground(dice as MutableList<Die>)
-//        val settings = viewModel.settings
-
-//        if (item.itemId == R.id.settingsFragment) {
-//            println("nav")
-//            findNavController().navigate(
-//                HomeFragmentDirections.actionHomeFragmentToSettingsFragment(
-//                    settings.animation,
-//                    settings.sound,
-//                    settings.vibration,
-//                    settings.darkMode
-//                )
-//            )
-//            return true
-//        }
 
         return NavigationUI.onNavDestinationSelected(
             item,
