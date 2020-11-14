@@ -1,26 +1,29 @@
 <resources>
     <string name="app_name">Die Rolling</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="preferences_key">Preferences</string>
     <string name="animation_preference">Animation</string>
     <string name="sound_preference">Sound</string>
     <string name="vibration_preference">Vibration</string>
-    <string name="short_hint">This is the select menu, it opens when no dice are on screen or when you tap the \"SELECT\" button. Select a type of die from the menu to add it.
+
+    <string name="short_hint">This is the select menu, it opens when no dice are on screen or when you tap the \"SELECT\" button. Select a type of dice from the menu to add it.
         \n
-        \nTap the \"ADD\" button to add more of you selected type.
+        \nTap the \"ADD\" button to add more of your selected type.
         \n
-        \nTap a die to replace or remove it.
+        \nTap a dice to replace or remove it.
         \n
         \nWhen you\'re ready - start rolling!</string>
-    <string name="about_the_app">
-        This app is inspired by the Android Developer Course on Udacity as well as Critical Roll.
+
+    <string name="about_the_app">This app is inspired by the Android Developer Course on Udacity as well as Critical Roll.
         \n
-        \nThe die symbols in the menus are by Lonnie Tapscott from the Noun Project.</string>
-    <string name="about_me">
-        I\'m from Germany and, as of November 2020, am studying and developing on my own after recently finishing school and soon starting to study at university.
+        \nThe dice symbols in the menus are by Lonnie Tapscott from the Noun Project.</string>
+
+    <string name="about_me">I\'m from Germany and, as of November 2020, am studying and developing on my own after recently finishing school and soon starting to study at university.
         \n
         \nYou can find me on <a href="https://github.com/LukasH77">GitHub</a>.
         \n
         \nBug reports, feedback or other messages can be either left as a review in the Play Store or sent via E-mail to:</string>
+
     <string name="email"><a href="">LHendeavours@gmail.com</a></string>
 </resources>
