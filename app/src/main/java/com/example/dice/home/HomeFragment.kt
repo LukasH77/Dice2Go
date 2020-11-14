@@ -1,5 +1,7 @@
 package com.example.dice.home
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.SoundPool
@@ -24,7 +26,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.dice.R
-import com.example.dice.database.SettingsDatabase
+//import com.example.dice.database.SettingsDatabase
 import com.example.dice.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
@@ -35,8 +37,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private lateinit var viewModelFactory: HomeViewModelFactory
-    private lateinit var viewModel: HomeViewModel
+//    private lateinit var viewModelFactory: HomeViewModelFactory
+//    private lateinit var viewModel: HomeViewModel
 
     private lateinit var timer: Timer
 
@@ -46,7 +48,8 @@ class HomeFragment : Fragment() {
     private lateinit var selectMenu: ConstraintLayout
     private lateinit var hintText: TextView
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    //    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NewApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,26 +57,39 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
 
-        val database = SettingsDatabase.createInstance(this.requireActivity().application)
-        val dao = database.settingsDao
+        val preferencesKey = getString(R.string.preferences_key)
 
-        viewModelFactory = HomeViewModelFactory(
-            dao,
-            binding.ivDie1,
-            binding.ivDie2,
-            binding.ivDie3,
-            binding.ivDie4,
-            binding.ivDie5,
-            binding.ivDie6
-        )
-        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+        val animationPreferenceKey = getString(R.string.animation_preference)
+        val soundPreferenceKey = getString(R.string.sound_preference)
+        val vibrationPreferenceKey = getString(R.string.vibration_preference)
 
-        try {
-            viewModel.settings = viewModel.getDBSettings()
-            println("vm settings updated")
-        } catch (e: Exception) {
-            println("updating vm settings failed")
-        }
+        val preferences = activity?.getSharedPreferences(preferencesKey, Context.MODE_PRIVATE)
+
+        val isAnimationOn = preferences?.getBoolean(animationPreferenceKey, true)
+        val isSoundOn = preferences?.getBoolean(soundPreferenceKey, true)
+        val isVibrationOn =
+            preferences?.getBoolean(vibrationPreferenceKey, Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+
+//        val database = SettingsDatabase.createInstance(this.requireActivity().application)
+//        val dao = database.settingsDao
+//
+//        viewModelFactory = HomeViewModelFactory(
+//            dao,
+//            binding.ivDie1,
+//            binding.ivDie2,
+//            binding.ivDie3,
+//            binding.ivDie4,
+//            binding.ivDie5,
+//            binding.ivDie6
+//        )
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+//
+//        try {
+//            viewModel.settings = viewModel.getDBSettings()
+//            println("vm settings updated")
+//        } catch (e: Exception) {
+//            println("updating vm settings failed")
+//        }
 
 //        val settings = viewModel.settings
 
@@ -197,13 +213,13 @@ class HomeFragment : Fragment() {
         rollButton.setOnClickListener {
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
-            val settings = viewModel.settings
+//            val settings = viewModel.settings
 //            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
 
             // avoids infinite roll when spamming the button
             if (::timer.isInitialized) timer.cancel()
 
-            if (settings.animation) Die.time = 8 else Die.time = 2
+            if (isAnimationOn!!) Die.time = 8 else Die.time = 2
 
 
             val vibePattern = LongArray(2)
@@ -211,12 +227,10 @@ class HomeFragment : Fragment() {
             vibePattern[1] = 125 * 2
 
             if (dice[0].isVisible) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    if (settings.vibration) {
-                        rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
-                    }
+                if (isVibrationOn!!) {
+                    rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
                 }
-                if (settings.sound) {
+                if (isSoundOn!!) {
                     if (rollingSound.isPlaying) {
                         rollingSound.reset()
                         rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
@@ -271,8 +285,8 @@ class HomeFragment : Fragment() {
         }
 
         clearButton.setOnClickListener {
-            val settings = viewModel.settings
-            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
+//            val settings = viewModel.settings
+//            println("${settings.animation}, ${settings.sound}, ${settings.vibration}, ${settings.darkMode}")
             Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
             Die.resetBackground(dice as MutableList<Die>)
             for (i in dice.indices) {
@@ -304,20 +318,20 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Die.removeMenus(dice as MutableList<Die>, dieMenu, selectMenu, hintText)
         Die.resetBackground(dice as MutableList<Die>)
-        val settings = viewModel.settings
+//        val settings = viewModel.settings
 
-        if (item.itemId == R.id.settingsFragment) {
-            println("nav")
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToSettingsFragment(
-                    settings.animation,
-                    settings.sound,
-                    settings.vibration,
-                    settings.darkMode
-                )
-            )
-            return true
-        }
+//        if (item.itemId == R.id.settingsFragment) {
+//            println("nav")
+//            findNavController().navigate(
+//                HomeFragmentDirections.actionHomeFragmentToSettingsFragment(
+//                    settings.animation,
+//                    settings.sound,
+//                    settings.vibration,
+//                    settings.darkMode
+//                )
+//            )
+//            return true
+//        }
 
         return NavigationUI.onNavDestinationSelected(
             item,

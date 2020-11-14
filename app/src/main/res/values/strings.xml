@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Die Rolling</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="preferences_key">Preferences</string>
+    <string name="animation_preference">Animation</string>
+    <string name="sound_preference">Sound</string>
+    <string name="vibration_preference">Vibration</string>
     <string name="short_hint">This is the select menu, it opens when no dice are on screen or when you tap the \"SELECT\" button. Select a type of die from the menu to add it.
         \n
         \nTap the \"ADD\" button to add more of you selected type.
