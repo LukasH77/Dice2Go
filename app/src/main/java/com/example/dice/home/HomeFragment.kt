@@ -97,11 +97,18 @@ class HomeFragment : Fragment() {
         val addButton = binding.bAdd
         val totalText = binding.tvTotal
 
-        var total = 0
+        var total: Int
 
         val rollingBuzzer = activity?.getSystemService<Vibrator>()
 
         var rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
+//        var rollingSound2 = MediaPlayer.create(this.context, R.raw.dice_sound)
+//        var rollingSound3 = MediaPlayer.create(this.context, R.raw.dice_sound)
+//        var rollingSound4 = MediaPlayer.create(this.context, R.raw.dice_sound)
+//        var rollingSound5 = MediaPlayer.create(this.context, R.raw.dice_sound)
+//        var rollingSound6 = MediaPlayer.create(this.context, R.raw.dice_sound)
+
+//        var sounds = arrayOf(rollingSound, rollingSound2, rollingSound3, rollingSound4, rollingSound5, rollingSound6)
 
         for (die in dice) {
             die.setupDieClicks(
@@ -166,13 +173,22 @@ class HomeFragment : Fragment() {
 
             val vibePattern = LongArray(2)
             vibePattern[0] = 10
-            vibePattern[1] = 125 * 2
+            vibePattern[1] = 250
+
+//            val lvi = Die.findLastVisibleIndex(dice as MutableList<Die>)
 
             if (dice[0].isVisible) {
                 if (isVibrationOn!!) {
                     rollingBuzzer?.vibrate(VibrationEffect.createWaveform(vibePattern, -1))
                 }
                 if (isSoundOn!!) {
+//                    for (i in 0..lvi) {
+//                        if (sounds[i].isPlaying) {
+//                            sounds[i].reset()
+//                            sounds[i] = MediaPlayer.create(this.context, R.raw.dice_sound)
+//                        }
+//                        sounds[i].start()
+//                    }
                     if (rollingSound.isPlaying) {
                         rollingSound.reset()
                         rollingSound = MediaPlayer.create(this.context, R.raw.dice_sound)
@@ -190,7 +206,7 @@ class HomeFragment : Fragment() {
                             if (!die.isVisible) continue else total += die.sides.indexOf(die.recentSides.last()) + 1
                         }
 //                        total += modifier
-                        totalText.text = "Total: $total"
+                        totalText.text = getString(R.string.total, total)
                     }
                 }
 
@@ -222,7 +238,7 @@ class HomeFragment : Fragment() {
                 }
             }
             Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
         clearButton.setOnClickListener {
@@ -235,8 +251,8 @@ class HomeFragment : Fragment() {
             Die.handleButtons(dice as MutableList<Die>, addButton, selectButton)
             clSelectionPopup.visibility = View.VISIBLE
             hintText.visibility = View.VISIBLE
-            totalText.text = "Total: "
-            addButton.text = "Add "
+            totalText.setText(R.string.empty_total)
+            addButton.setText(R.string.add)
         }
 
         binding.clMain.setOnClickListener {

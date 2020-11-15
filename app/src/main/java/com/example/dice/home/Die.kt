@@ -96,8 +96,8 @@ open class Die(
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
-                addButton.text = "Add d4"
-                totalText.text = "Total: "
+                addButton.setText(R.string.add_d4)
+                totalText.setText(R.string.empty_total)
             }
 
             addD6Button.setOnClickListener {
@@ -118,8 +118,8 @@ open class Die(
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
-                addButton.text = "Add d6"
-                totalText.text = "Total: "
+                addButton.setText(R.string.add_d6)
+                totalText.setText(R.string.empty_total)
             }
 
             addD8Button.setOnClickListener {
@@ -140,8 +140,8 @@ open class Die(
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
-                addButton.text = "Add d8"
-                totalText.text = "Total: "
+                addButton.setText(R.string.add_d8)
+                totalText.setText(R.string.empty_total)
             }
 
             addD10Button.setOnClickListener {
@@ -162,8 +162,8 @@ open class Die(
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
-                addButton.text = "Add d10"
-                totalText.text = "Total: "
+                addButton.setText(R.string.add_d10)
+                totalText.setText(R.string.empty_total)
             }
 
             addD12Button.setOnClickListener {
@@ -184,8 +184,8 @@ open class Die(
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
-                addButton.text = "Add d12"
-                totalText.text = "Total: "
+                addButton.setText(R.string.add_d12)
+                totalText.setText(R.string.empty_total)
             }
 
             addD20Button.setOnClickListener {
@@ -206,8 +206,8 @@ open class Die(
                 setVisibility(dice)
                 removeMenus(dice, dieMenu, selectMenu, hintText)
                 handleButtons(dice, addButton, selectButton)
-                addButton.text = "Add d20"
-                totalText.text = "Total: "
+                addButton.setText(R.string.add_d20)
+                totalText.setText(R.string.empty_total)
             }
 
             exitSelectButton.setOnClickListener {
@@ -335,7 +335,7 @@ open class Die(
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
         replaceD6Button.setOnClickListener {
@@ -346,7 +346,7 @@ open class Die(
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
         replaceD8Button.setOnClickListener {
@@ -357,7 +357,7 @@ open class Die(
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
         replaceD10Button.setOnClickListener {
@@ -368,7 +368,7 @@ open class Die(
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
         replaceD12Button.setOnClickListener {
@@ -379,7 +379,7 @@ open class Die(
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
         replaceD20Button.setOnClickListener {
@@ -390,7 +390,7 @@ open class Die(
             dice[selectedIndex].isVisible = true
             setVisibility(dice)
             dieMenu.visibility = View.GONE
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
         removeButton.setOnClickListener {
@@ -421,10 +421,10 @@ open class Die(
                 selectMenu.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
                 hintText.visibility = View.VISIBLE
-                addButton.text = "Add "
+                addButton.setText(R.string.add)
             }
             handleButtons(dice, addButton, selectButton)
-            totalText.text = "Total: "
+            totalText.setText(R.string.empty_total)
         }
 
 //        holdButton.setOnClickListener {

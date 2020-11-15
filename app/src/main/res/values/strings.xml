@@ -26,4 +26,13 @@
         \nBug reports, feedback or other messages can be either left as a review in the Play Store or sent via E-mail to:</string>
 
     <string name="email"><a href="">LHendeavours@gmail.com</a></string>
+    <string name="empty_total">Total: </string>
+    <string name="total">Total: %d</string>
+    <string name="add">"Add "</string>
+    <string name="add_d4">Add d4</string>
+    <string name="add_d6">Add d6</string>
+    <string name="add_d8">Add d8</string>
+    <string name="add_d10">Add d10</string>
+    <string name="add_d12">Add d12</string>
+    <string name="add_d20">Add d20</string>
 </resources>
