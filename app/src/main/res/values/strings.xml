@@ -15,6 +15,8 @@
         \n
         \nWhen you\'re ready - start rolling!</string>
 
+    <string name="about_the_app_title">About the App</string>
+    <string name="about_me_title">About Me</string>
     <string name="about_the_app">This app is inspired by the Android Developer Course on Udacity as well as Critical Roll.
         \n
         \nThe dice symbols in the menus are by Lonnie Tapscott from the Noun Project.</string>
@@ -37,8 +39,7 @@
     <string name="add_d10">Add d10</string>
     <string name="add_d12">Add d12</string>
     <string name="add_d20">Add d20</string>
-    <string name="about_me_title">About Me</string>
-    <string name="about_the_app_title">About the App</string>
+
     <string name="replace_d4_icon">Replace selected dice with a d4</string>
     <string name="replace_d6_icon">Replace selected dice with a d6</string>
     <string name="replace_d8_icon">Replace selected dice with a d8</string>
@@ -47,7 +48,7 @@
     <string name="replace_d20_icon">Replace selected dice with a d20</string>
     <string name="remove_icon">Remove selected dice</string>
     <string name="exit_die_menu">Exit die menu</string>
-    <string name="version_tracker">V 0.1</string>
+
     <string name="add_d4_icon">Add a d4</string>
     <string name="add_d6_icon">Add a d6</string>
     <string name="add_d8_icon">Add a d8</string>
@@ -55,6 +56,7 @@
     <string name="add_d12_icon">Add a d12</string>
     <string name="add_d20_icon">Add a d20</string>
     <string name="exit_select_menu">Exit select menu</string>
+
     <string name="clear">Clear</string>
     <string name="roll">Roll</string>
     <string name="select">Select</string>
@@ -64,4 +66,9 @@
     <string name="dice4">Fourth dice</string>
     <string name="dice5">Fifth dice</string>
     <string name="dice6">Sixth dice</string>
+
+    <string name="version_tracker">V 0.9</string>
+    <string name="vibration">Vibration</string>
+    <string name="sound">Sound</string>
+    <string name="animation">Animation</string>
 </resources>
