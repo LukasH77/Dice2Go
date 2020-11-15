@@ -10,7 +10,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".about.AboutFragment">
 
             <TextView
@@ -20,7 +20,7 @@
                 android:background="?colorPrimary"
                 android:gravity="center"
                 android:padding="16dp"
-                android:text=" About Me"
+                android:text="@string/about_me_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
                 android:background="?colorPrimary"
                 android:gravity="center"
                 android:padding="16dp"
-                android:text="About the App"
+                android:text="@string/about_the_app_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
