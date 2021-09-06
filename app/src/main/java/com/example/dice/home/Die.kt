@@ -17,6 +17,7 @@ open class Die(
     companion object {
 
         var time = 0
+        //
 
         fun setVisibility(dice: MutableList<Die>) {
             for (die in dice) {
